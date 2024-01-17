@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL, VENUES } from "../constants/api";
 import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
+import VenuesCards from "./VenuesCards";
 
 const url = BASE_URL + VENUES;
 
@@ -18,7 +19,7 @@ function VenuesList() {
         setIsError(false);
 
         setIsLoading(true);
-        const response = await fetch(url);
+        const response = await fetch(url + "?_owner=true&_bookings=true");
         const json = await response.json();
         setPosts(json);
 
@@ -44,22 +45,34 @@ function VenuesList() {
   return (
     <div>
       {posts.map((post) => (
-        <Link key={post.id} to={"venue/" + post.id}>
-          <div>
-            <h2>{post.name}</h2>
-            <p>{post.description}</p>
-            <div>
-              {post.media.length > 0 ? (
-                <img src={post.media} alt="image of"></img>
-              ) : (
-                <img src={viteLogo} />
-              )}
-            </div>
-          </div>
-        </Link>
+        <VenuesCards key={post.id} post={post} />
       ))}
     </div>
   );
+
+  // return (
+  //   <div>
+  //     {posts.map((post) => (
+  //       <div key={post.id}>
+  //         <div>
+  //           <p>{post.owner.name}</p>
+  //           <h2>{post.name}</h2>
+  //           <p>{post.description}</p>
+  //           <div>
+  //             {post.media.length > 0 ? (
+  //               <img src={post.media} alt="image of"></img>
+  //             ) : (
+  //               <img src={viteLogo} />
+  //             )}
+  //           </div>
+  //         </div>
+  //         <Link to={"venue/" + post.id + "?_owner=true&_bookings=true"}>
+  //           Details
+  //         </Link>
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
 }
 
 export default VenuesList;
