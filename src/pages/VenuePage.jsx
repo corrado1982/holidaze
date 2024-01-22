@@ -19,9 +19,7 @@ function VenuePage() {
 
   const urlVenue = url + "/" + id + "?_owner=true&_bookings=true";
 
-  // The useEffect will run once when the component first mounts
   useEffect(() => {
-    // Function that gets our posts
     async function getData() {
       try {
         setShowPage(false);
@@ -30,9 +28,9 @@ function VenuePage() {
         setIsLoading(true);
         const response = await fetch(urlVenue);
         const json = await response.json();
-        // Setting our `posts` state to the API data we received
+
         setPosts(json);
-        // console.log(posts);
+
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -42,10 +40,9 @@ function VenuePage() {
       }
     }
     getData();
-    // getData(`${url}/${id}?_owner=true&_bookings=true`);
   }, []);
   console.log(posts);
-  //   console.log(posts.owner.name);
+
   if (isLoading) {
     return <div>Loading posts</div>;
   }
@@ -53,16 +50,6 @@ function VenuePage() {
   if (isError) {
     return <div>Error loading data</div>;
   }
-  //   console.log(id);
-  //   console.log(posts.media.length);
-
-  //   let pictureDetail;
-  //   if (posts.media.length > 0) {
-  //     pictureDetail = <img src={posts.media} alt="image of" />;
-  //   } else {
-  //     pictureDetail = <div>pic missing</div>;
-  //   }
-  //   const idPic = useId();
 
   if (showPage) {
     const { name, description, media, owner, meta } = posts;

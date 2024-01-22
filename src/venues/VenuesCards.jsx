@@ -13,7 +13,7 @@ function VenuesCards(props) {
           <p>{description}</p>
           <div>
             {media.length > 0 ? (
-              <img src={media} alt="image of"></img>
+              <img src={media[0]} alt="image of"></img>
             ) : (
               <img src={viteLogo} />
             )}
