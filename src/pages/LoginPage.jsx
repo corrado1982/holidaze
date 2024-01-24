@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { BASE_URL } from "../constants/api";
 import { LOGIN_URL } from "../constants/api";
+import * as storage from "../storage/index.js";
 
 const schema = yup
   .object({
@@ -40,9 +41,21 @@ function LoginPage() {
       method: "POST",
       body: JSON.stringify(data),
     });
-    const json = await response.json();
+    // const json = await response.json();
     console.log(response);
-    console.log(json);
+    // console.log(json);
+
+    if (response.ok) {
+      const { accessToken, ...user } = await response.json();
+      storage.save("token", accessToken);
+      storage.save("profile", user);
+      // storage separate avatar
+      storage.save("avatar", user.avatar);
+
+      // console.log(response);
+      // location.href = "/listings"; //    ----change location-----
+      return;
+    }
   }
 
   return (

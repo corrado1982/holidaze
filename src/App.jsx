@@ -11,6 +11,8 @@ import Layout from "./components/layout/Layout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import VenuePage from "./pages/VenuePage";
+import Avatar from "./pages/Avatar";
+import MyBookings from "./pages/MyBookings";
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
+
+          <Route path="avatar" element={<Avatar />} />
+          <Route path="mybookings" element={<MyBookings />} />
 
           <Route path="venue/:id" element={<VenuePage />} />
           <Route path="*" element={<RouteNotFound />} />

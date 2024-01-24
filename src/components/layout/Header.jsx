@@ -1,4 +1,5 @@
 import UserNav from "./nav/UserNav";
+import { isItLogged } from "../isItLogged";
 
 function Header() {
   return (
@@ -8,5 +9,6 @@ function Header() {
     </header>
   );
 }
+console.log(isItLogged());
 
 export default Header;
