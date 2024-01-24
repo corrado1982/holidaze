@@ -51,9 +51,10 @@ function LoginPage() {
       storage.save("profile", user);
       // storage separate avatar
       storage.save("avatar", user.avatar);
+      storage.save("manager", user.venueManager);
 
-      // console.log(response);
-      // location.href = "/listings"; //    ----change location-----
+      console.log(user);
+      location.href = "/"; //    ----change location-----
       return;
     }
   }

@@ -13,6 +13,7 @@ import RegisterPage from "./pages/RegisterPage";
 import VenuePage from "./pages/VenuePage";
 import Avatar from "./pages/Avatar";
 import MyBookings from "./pages/MyBookings";
+import MyVenue from "./pages/MyVenue";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
 
           <Route path="avatar" element={<Avatar />} />
           <Route path="mybookings" element={<MyBookings />} />
+          <Route path="myvenue" element={<MyVenue />} />
 
           <Route path="venue/:id" element={<VenuePage />} />
           <Route path="*" element={<RouteNotFound />} />
