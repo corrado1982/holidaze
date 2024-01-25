@@ -8,7 +8,7 @@ function VenuesCards(props) {
     <Link to={"venue/" + id + "?_owner=true&_bookings=true"}>
       <div>
         <div>
-          <p>{owner.name}</p>
+          {/* <p>{owner.name}</p> */}
           <h2>{name}</h2>
           <p>{description}</p>
           <div>

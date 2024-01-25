@@ -19,7 +19,8 @@ function VenuesList() {
         setIsError(false);
 
         setIsLoading(true);
-        const response = await fetch(url + "?_owner=true&_bookings=true");
+        const response = await fetch(url);
+        // + "?_owner=true&_bookings=true"
         const json = await response.json();
         setPosts(json);
 

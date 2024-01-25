@@ -2,16 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { BASE_URL } from "../constants/api";
-import { REGISTER_URL } from "../constants/api";
-// import { object, string, number, date, InferType } from "yup";
+// import { BASE_URL } from "../constants/api";
+// import { REGISTER_URL } from "../constants/api";
+import { onRegister } from "../auth/register";
 
 const schema = yup
   .object({
     name: yup
       .string()
+      .trim()
       .min(3, "Your first name should be at least 3 characters.")
-      .max(10, "Your first name cannot be longer than 10 characters.")
+      .max(100, "Your first name cannot be longer than 10 characters.")
       .required("Please enter your first name"),
 
     email: yup
@@ -39,23 +40,25 @@ function RegisterPage() {
     resolver: yupResolver(schema),
   });
 
-  async function onSubmit(data) {
-    event.preventDefault();
-    console.log(data);
-    const response = await fetch(BASE_URL + REGISTER_URL, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    console.log(response);
-  }
+  // async function onRegister(data) {
+  //   event.preventDefault();
+  //   console.log(data);
+  //   const response = await fetch(BASE_URL + REGISTER_URL, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     method: "POST",
+  //     body: JSON.stringify(data),
+  //   });
+  //   console.log(response);
+  //   console.log(data.password);
+  //   console.log(data.email);
+  // }
 
   return (
     <>
       <h1>Register</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onRegister)}>
         <div>
           <label htmlFor="name">Name</label>
           <input {...register("name")} />
@@ -81,7 +84,7 @@ function RegisterPage() {
           <input {...register("venueManager")} type="checkbox" />
           <label htmlFor="checkbox">Register as a manager</label>
         </div>
-        {/* <button type="submit" placeholder="Register" /> */}
+
         <button type="submit">Register</button>
       </form>
     </>
