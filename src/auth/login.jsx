@@ -21,6 +21,7 @@ export async function onLogin(data) {
     storage.save("profile", user);
     storage.save("avatar", user.avatar);
     storage.save("manager", user.venueManager);
+    storage.save("username", user.name);
 
     console.log(user);
     location.href = "/";
