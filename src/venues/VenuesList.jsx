@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
 import VenuesCards from "./VenuesCards";
 
-const url = BASE_URL + VENUES;
+const url = BASE_URL + VENUES + "?limit=10";
 
 function VenuesList() {
   const [posts, setPosts] = useState([]);

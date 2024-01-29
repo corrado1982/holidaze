@@ -1,23 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as storage from "../storage/index.js";
 import { BASE_URL } from "../constants/api";
 
-const avatar = storage.load("avatar");
+let avatar = storage.load("avatar");
 const userName = storage.load("username");
 const token = storage.load("token");
-// console.log(avatar);
 
 export function Avatar() {
   const [avatarImg, setAvatarImg] = useState(avatar);
 
   function onAvatarChange(event) {
     setAvatarImg(event.target.value);
-    console.log(avatarImg);
   }
 
   async function upDateAvatar() {
     event.preventDefault();
-    // console.log(data);
+
     const response = await fetch(
       BASE_URL + "/profiles/" + userName + "/media",
       {
@@ -30,20 +28,15 @@ export function Avatar() {
       }
     );
     const data = await response.json();
-    console.log(response);
+    console.log(data);
 
-    if (response.ok) {
-      storage.save("avatar", data.avatar);
-
-      console.log(user);
-
-      // return;
-    }
+    storage.save("avatar", data.avatar);
+    avatar = avatarImg;
   }
-  // console.log(avatar);
+
   return (
     <div>
-      <img src={avatar} />
+      <img src={avatarImg} />
       <form onSubmit={upDateAvatar}>
         <input
           value={avatarImg}
