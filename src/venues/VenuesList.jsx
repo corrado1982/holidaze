@@ -3,8 +3,8 @@ import { BASE_URL, VENUES } from "../constants/api";
 import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
 import VenuesCards from "./VenuesCards";
-
-const url = BASE_URL + VENUES + "?limit=10";
+// + "?limit=10"
+const url = BASE_URL + VENUES;
 
 function VenuesList() {
   const [posts, setPosts] = useState([]);
@@ -44,36 +44,12 @@ function VenuesList() {
   console.log(posts);
 
   return (
-    <div>
+    <div className="mt-6 px-4 grid grid-cols-3 gap-x-12 gap-y-10">
       {posts.map((post) => (
         <VenuesCards key={post.id} post={post} />
       ))}
     </div>
   );
-
-  // return (
-  //   <div>
-  //     {posts.map((post) => (
-  //       <div key={post.id}>
-  //         <div>
-  //           <p>{post.owner.name}</p>
-  //           <h2>{post.name}</h2>
-  //           <p>{post.description}</p>
-  //           <div>
-  //             {post.media.length > 0 ? (
-  //               <img src={post.media} alt="image of"></img>
-  //             ) : (
-  //               <img src={viteLogo} />
-  //             )}
-  //           </div>
-  //         </div>
-  //         <Link to={"venue/" + post.id + "?_owner=true&_bookings=true"}>
-  //           Details
-  //         </Link>
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
 }
 
 export default VenuesList;

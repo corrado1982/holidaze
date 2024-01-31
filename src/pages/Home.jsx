@@ -3,7 +3,7 @@ import VenuesList from "../venues/VenuesList";
 
 function Home() {
   return (
-    <div>
+    <div className="bg-sky-100">
       <div>Home Page</div>
       <VenuesList />
       <div></div>

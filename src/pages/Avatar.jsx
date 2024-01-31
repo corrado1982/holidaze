@@ -35,15 +35,16 @@ export function Avatar() {
   }
 
   return (
-    <div>
-      <img src={avatarImg} />
-      <form onSubmit={upDateAvatar}>
+    <div className=" bg-sky-100 rounded-lg shadow-xl m-auto size-4/5">
+      <img className="mx-auto my-5" src={avatarImg} />
+      <form className="flex flex-col" onSubmit={upDateAvatar}>
         <input
+          className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
           value={avatarImg}
           placeholder="Avatar URL"
           onChange={onAvatarChange}
         />
-        <button>Update</button>
+        <button className=" btn-primary mx-auto my-5">Update</button>
       </form>
     </div>
   );

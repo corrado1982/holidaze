@@ -52,53 +52,172 @@ function VenuePage() {
   }
 
   if (showPage) {
-    const { name, description, media, owner, meta } = posts;
+    const {
+      name,
+      description,
+      media,
+      owner,
+      meta,
+      location,
+      maxGuests,
+      bookings,
+      rating,
+      price,
+    } = posts;
     return (
       <div>
-        <div>
-          <p>{owner.name}</p>
-          <h2>{name}</h2>
-          <p>{description}</p>
-          <div>
-            {/* {posts.media ? (
+        <div className="bg-sky-50 rounded-lg shadow-xl size-3/5 m-auto">
+          <div className="flex justify-around flex-wrap m-5">
+            <div className="m-5">
+              <img
+                src={owner.avatar}
+                alt={owner.name}
+                className="h-20 w-20 rounded-full"
+              />
+            </div>
+            <div className=" stronger-text my-auto">
+              <p>{owner.name}</p>
+              <p>{owner.email}</p>
+            </div>
+          </div>
+          <div className="flex items-center flex-col">
+            <h2>{name}</h2>
+            <p className="mx-14">{description}</p>
+            <div className="flex flex-wrap m-2">
+              {/* {posts.media ? (
             <img src={posts.media} alt="image of"></img>
           ) : (
             <img src={viteLogo} />
           )} */}
-            {media.map((pic) => (
-              <img key={pic} src={pic} alt="{viteLogo}"></img>
-            ))}
-            {/* {owner.media.map((own) => (
+              {media.map((pic) => (
+                <img
+                  key={pic}
+                  src={pic}
+                  alt="{viteLogo}"
+                  className="h-48 m-2"
+                ></img>
+              ))}
+              {/* {owner.media.map((own) => (
             <p>{own.name}</p>
           ))} */}
+            </div>
+          </div>
+          {/* Icons */}
+          <div className="flex flex-row justify-evenly m-3 flex-wrap">
+            <div className="flex justify-between">
+              <p>Brakfast: </p>
+              <div className="flex">
+                {meta.breakfast ? (
+                  <img src="../../public/Icon-check.png" />
+                ) : (
+                  <img src="../../public/Icon-close.png" />
+                )}
+                <img
+                  src="../../public/Icon-breakfast.png"
+                  className="ml-4 sm-icons"
+                ></img>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <p>Parking: </p>
+              <div className="flex">
+                {meta.parking ? (
+                  <img src="../../public/Icon-check.png" />
+                ) : (
+                  <img src="../../public/Icon-close.png" />
+                )}
+                <img
+                  src="../../public/Icon-parking.png"
+                  className="ml-4 sm-icons"
+                ></img>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <p>Pets: </p>
+              <div className="flex">
+                {meta.pets ? (
+                  <img src="../../public/Icon-check.png" />
+                ) : (
+                  <img src="../../public/Icon-close.png" />
+                )}
+                <img
+                  src="../../public/Icon-pets.png"
+                  className="ml-4 sm-icons"
+                ></img>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <p>Wifi: </p>
+              <div className="flex">
+                {meta.wifi ? (
+                  <img src="../../public/Icon-check.png" />
+                ) : (
+                  <img src="../../public/Icon-close.png" />
+                )}
+                <img
+                  src="../../public/Icon-wifi.png"
+                  className="ml-4 sm-icons"
+                ></img>
+              </div>
+            </div>
+            <div className="flex justify-between">
+              <p>Guests: </p>
+              <div className="flex">
+                <p>{maxGuests}</p>
+                <img
+                  src="../../public/Icon-person.png"
+                  className="ml-6 sm-icons"
+                ></img>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-between">
+            <p className="my-5 mx-14 stronger-text">Price: {price} NOK</p>
+            <div className="flex m-5 mx-14">
+              <p className="stronger-text">{rating}</p>
+              <img
+                src="../../public/Icon-star.png"
+                alt=""
+                className="ml-6 sm-icons "
+              />
+            </div>
+          </div>
+          <hr />
+          <div className="flex justify-between flex-wrap">
+            <div className="mx-14 my-5">
+              <p className="stronger-text">Location:</p>
+              <p>{location.address},</p>
+              <p> {location.city},</p>
+              <p> {location.country}</p>
+            </div>
+            <div className="w-80 mx-14 my-5">
+              <p className="stronger-text">About the place:</p>
+              <p>{description}</p>
+            </div>
+          </div>
+          <div>
+            <form className="flex flex-col">
+              <label htmlFor="">
+                <p>From:</p>
+                <input
+                  type="date"
+                  className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+                />
+              </label>
+              <label htmlFor="">
+                <p>To:</p>
+                <input
+                  type="date"
+                  className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+                />
+              </label>
+
+              <button className=" btn-primary mx-auto my-5">Update</button>
+            </form>
           </div>
         </div>
       </div>
     );
   }
-
-  //   console.log(meta.wifi);
-  //   return (
-  //     <div>
-  //       <div>
-  //         <p>{owner.name}</p>
-  //         <h2>{name}</h2>
-  //         <p>{description}</p>
-  //         <div>
-  //           {/* {posts.media ? (
-  //             <img src={posts.media} alt="image of"></img>
-  //           ) : (
-  //             <img src={viteLogo} />
-  //           )} */}
-  //           {/* {posts.media.map((pic) => ( */}
-  //           <img src={media} alt="{viteLogo}"></img>
-  //           {/* ))} */}
-  //           {/* {owner.media.map((own) => (
-  //             <p>{own.name}</p>
-  //           ))} */}
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
 }
 export default VenuePage;

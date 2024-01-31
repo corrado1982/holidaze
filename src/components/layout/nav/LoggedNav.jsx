@@ -7,7 +7,7 @@ import { logout } from "../../../auth/logout";
 
 function LoggedNav() {
   return (
-    <nav>
+    <nav className="bg-blue-800 text-white ">
       {/* {isManager() ? ( */}
       <ul>
         <li>
