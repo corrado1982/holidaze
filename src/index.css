@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+  nav {
+    @apply bg-blue-800 text-white;
+  }
   h1 {
     @apply text-3xl font-bold;
   }

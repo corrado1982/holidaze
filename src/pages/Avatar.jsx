@@ -3,7 +3,7 @@ import * as storage from "../storage/index.js";
 import { BASE_URL } from "../constants/api";
 
 let avatar = storage.load("avatar");
-const userName = storage.load("username");
+let userName = storage.load("username");
 const token = storage.load("token");
 
 export function Avatar() {
@@ -11,6 +11,7 @@ export function Avatar() {
 
   function onAvatarChange(event) {
     setAvatarImg(event.target.value);
+    // avatar = storage.load("avatar");
   }
 
   async function upDateAvatar() {
