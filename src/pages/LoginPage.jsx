@@ -61,24 +61,41 @@ function LoginPage() {
   // }
 
   return (
-    <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit(onLogin)}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input {...register("email")} type="email" />
+    <div>
+      <form
+        className="flex flex-col card-bg  size-1/2 m-auto"
+        onSubmit={handleSubmit(onLogin)}
+      >
+        <h1 className="mx-auto flex justify-center my-10">Login Page</h1>
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="email">
+            Email
+          </label>
+          <input
+            {...register("email")}
+            type="email"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
           <p>{errors.email?.message}</p>
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <input {...register("password")} type="password" />
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="password">
+            Password
+          </label>
+          <input
+            {...register("password")}
+            type="password"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
           <p>{errors.password?.message}</p>
         </div>
 
-        <button type="submit">Log in</button>
+        <button className="btn-primary m-auto my-10" type="submit">
+          Log in
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 

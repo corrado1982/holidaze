@@ -56,38 +56,66 @@ function RegisterPage() {
   // }
 
   return (
-    <>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit(onRegister)}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input {...register("name")} />
+    <div className="my-5 card-bg size-1/2 m-auto">
+      <form className="py-5" onSubmit={handleSubmit(onRegister)}>
+        <h1 className="mx-auto flex justify-center my-10">Register</h1>
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="name">
+            Name
+          </label>
+          <input
+            {...register("name")}
+            type="text"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
           <p>{errors.name?.message}</p>
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input {...register("email")} type="email" />
+        <div className="flex flex-col ">
+          <label htmlFor="email" className="m-auto">
+            Email
+          </label>
+          <input
+            {...register("email")}
+            type="email"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
           <p>{errors.email?.message}</p>
         </div>
-        <div>
-          <label htmlFor="avatar">Avatar Url</label>
-          <input {...register("avatar")} type="url" />
+        <div className="flex flex-col ">
+          <label htmlFor="avatar" className="m-auto">
+            Avatar Url
+          </label>
+          <input
+            {...register("avatar")}
+            type="url"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
           <p>{errors.avatar?.message}</p>
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <input {...register("password")} type="password" />
+        <div className="flex flex-col ">
+          <label htmlFor="password" className="m-auto">
+            Password
+          </label>
+          <input
+            {...register("password")}
+            type="password"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
           <p>{errors.password?.message}</p>
         </div>
-        <div>
-          <input {...register("venueManager")} type="checkbox" />
-          <label htmlFor="checkbox">Register as a manager</label>
+        <div className="flex justify-center">
+          <input {...register("venueManager")} type="checkbox" className="" />
+          <label htmlFor="checkbox" className="">
+            Register as a manager
+          </label>
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" className="btn-primary m-auto my-10 flex">
+          Register
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 
