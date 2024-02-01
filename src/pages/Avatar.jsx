@@ -8,6 +8,7 @@ const token = storage.load("token");
 
 export function Avatar() {
   const [avatarImg, setAvatarImg] = useState(avatar);
+  const [newAvatar, setNewAvatar] = useState(null);
 
   function onAvatarChange(event) {
     setAvatarImg(event.target.value);
@@ -32,12 +33,23 @@ export function Avatar() {
     console.log(data);
 
     storage.save("avatar", data.avatar);
-    avatar = avatarImg;
+    setNewAvatar(storage.load("avatar"));
+    // let newAvatar = storage.load("avatar");
+    // console.log(newAvatar);
+
+    // avatar = avatarImg;
   }
 
+  // const newAvatar = storage.load("avatar");
+  // console.log(newAvatar);
+  // useEffect(() => {
+  //   let newAvatar = storage.load("avatar");
+  //   console.log(newAvatar);
+  //   console.log("useffect works");
+  // }, [upDateAvatar]);
   return (
     <div className=" bg-sky-100 rounded-lg shadow-xl m-auto size-4/5">
-      <img className="mx-auto my-5" src={avatarImg} />
+      <img className="mx-auto my-5" src={newAvatar} />
       <form className="flex flex-col" onSubmit={upDateAvatar}>
         <input
           className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
