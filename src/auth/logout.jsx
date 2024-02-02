@@ -1,6 +1,6 @@
-import * as storage from "../storage/index.js";
+// import * as storage from "../storage/index.js";
 
-export function logout() {
+export default function logout() {
   localStorage.clear();
   location.href = "/";
 }
