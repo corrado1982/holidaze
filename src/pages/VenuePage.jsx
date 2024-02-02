@@ -3,18 +3,21 @@ import { useId } from "react";
 import { json, useParams } from "react-router-dom";
 import { BASE_URL, VENUES } from "../constants/api";
 import viteLogo from "/src/vite.svg";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const url = BASE_URL + VENUES;
 
 function VenuePage() {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endtDate, setEndDate] = useState(new Date());
   const [posts, setPosts] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
-
   const [isError, setIsError] = useState(false);
-
   const [showPage, setShowPage] = useState(false);
 
+  console.log(startDate);
+  console.log(endtDate);
   let { id } = useParams();
 
   const urlVenue = url + "/" + id + "?_owner=true&_bookings=true";
@@ -93,7 +96,7 @@ function VenuePage() {
                 <img
                   key={pic}
                   src={pic}
-                  alt="{viteLogo}"
+                  alt="venue pic"
                   className="h-48 m-2"
                 ></img>
               ))}
@@ -196,25 +199,20 @@ function VenuePage() {
             </div>
           </div>
           <div>
-            <form className="flex flex-col">
-              <label htmlFor="">
-                <p>From:</p>
-                <input
-                  type="date"
-                  className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-                />
-              </label>
-              <label htmlFor="">
-                <p>To:</p>
-                <input
-                  type="date"
-                  className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-                />
-              </label>
-
-              <button className=" btn-primary mx-auto my-5">Update</button>
-            </form>
+            <DatePicker
+              dateFormat="dd/MM/yyyy"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />
           </div>
+          <div>
+            <DatePicker
+              dateFormat="dd/MM/yyyy"
+              selected={endtDate}
+              onChange={(date) => setEndDate(date)}
+            />
+          </div>
+          <button className=" btn-primary mx-auto my-5">Update</button>
         </div>
       </div>
     );
