@@ -35,7 +35,7 @@ function LoggedNav() {
           <Link to="/">Holidaze</Link>
         </div>
         <div className="flex items-center">
-          <p>{userName}</p>
+          <p>Welcome back: {userName}</p>
           <div>
             <button
               onClick={handleShowMenu}
