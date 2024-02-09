@@ -6,7 +6,7 @@ function UserNav() {
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Holidaze</Link>
         </li>
         <li>
           <Link to="/login">Log in</Link>
