@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
+import MyBookings from "../components/MyBookings";
 const user = storage.load("username");
 const url =
   BASE_URL + "/profiles/" + user + "/bookings?_customer=true&_venue=true";
 
 const token = storage.load("token");
 
-function MyBookings() {
+function MyBookingsPage() {
   const [posts, setPosts] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -53,27 +54,12 @@ function MyBookings() {
     <>
       <h1>My Bookings</h1>
       <div className="bg-sky-50 rounded-lg shadow-xl size-4/5 m-auto">
-        {posts.map((myBooking) => (
-          <div className="my-5 card-bg mx-auto flex" key={myBooking.id}>
-            <img
-              src={myBooking.venue.media[0]}
-              alt=""
-              className=" h-24 w-24 object-fill rounded-lg m-2"
-            />
-            <div className="flex flex-col justify-between">
-              <div>
-                <h2>{myBooking.venue.name}</h2>
-              </div>
-              <div className="mb-2">
-                <p>from: {myBooking.dateFrom}</p>
-                <p>to: {myBooking.dateTo}</p>
-              </div>
-            </div>
-          </div>
+        {posts.map((post) => (
+          <MyBookings key={post.id} post={post} />
         ))}
       </div>
     </>
   );
 }
 
-export default MyBookings;
+export default MyBookingsPage;

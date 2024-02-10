@@ -12,8 +12,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import VenuePage from "./pages/VenuePage";
 import Avatar from "./pages/Avatar";
-import MyBookings from "./pages/MyBookings";
 import MyVenue from "./pages/MyVenue";
+import MyBookingsPage from "./pages/MyBookingsPage";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           <Route path="register" element={<RegisterPage />} />
 
           <Route path="avatar" element={<Avatar />} />
-          <Route path="mybookings" element={<MyBookings />} />
+          <Route path="mybookings" element={<MyBookingsPage />} />
           <Route path="myvenue" element={<MyVenue />} />
 
           <Route path="venue/:id" element={<VenuePage />} />
