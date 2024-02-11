@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import { Link, json, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
@@ -135,7 +135,8 @@ function BookingForm(props) {
         ))}
       </ul> */}
       {isItLogged() ? (
-        <form className="flex flex-col items-center" onSubmit={onBookingSubmit}>
+        <form className="flex flex-col items-center">
+          {/* onSubmit={onBookingSubmit} */}
           <label htmlFor="quantity">Guests: (between 1 and {maxGuests}):</label>
           <input
             className="my-5"
@@ -179,7 +180,11 @@ function BookingForm(props) {
             selectsDisabledDaysInRange
             inline
           />
-          <button className=" btn-primary mx-auto my-5">Book it</button>
+          <button onClick={onBookingSubmit}>
+            <Link to="/mybookings" className=" btn-primary mx-auto my-10">
+              Book it
+            </Link>
+          </button>
         </form>
       ) : (
         <div></div>
