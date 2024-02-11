@@ -2,11 +2,26 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import MyBookings from "../components/MyBookings";
+// import { removePost } from "../components/MyBookings";
 const user = storage.load("username");
 const url =
   BASE_URL + "/profiles/" + user + "/bookings?_customer=true&_venue=true";
 
 const token = storage.load("token");
+
+// const urlRemove = BASE_URL + "/bookings/" + id;
+
+export async function removePost(id) {
+  const urlRemove = BASE_URL + "/bookings/" + id;
+  const response = await fetch(urlRemove, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    method: "DELETE",
+  });
+  console.log(response);
+}
 
 function MyBookingsPage() {
   const [posts, setPosts] = useState([]);

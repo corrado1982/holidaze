@@ -1,23 +1,24 @@
 import React from "react";
-import * as storage from "../storage/index";
-import { BASE_URL } from "../constants/api";
+import { removePost } from "../pages/MyBookingsPage";
+// import * as storage from "../storage/index";
+// import { BASE_URL } from "../constants/api";
 // import MyBookingsPage from "../pages/MyBookingsPage";
 
 // const url = BASE_URL + "/bookings/"+ id;
 
-const token = storage.load("token");
+// const token = storage.load("token");
 
-export async function removePost(id) {
-  const url = BASE_URL + "/bookings/" + id;
-  const response = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    method: "DELETE",
-  });
-  console.log(response);
-}
+// export async function removePost(id) {
+//   const url = BASE_URL + "/bookings/" + id;
+//   const response = await fetch(url, {
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//     },
+//     method: "DELETE",
+//   });
+//   console.log(response);
+// }
 
 function MyBookings(props) {
   const { venue, dateFrom, dateTo, id } = props.post;
