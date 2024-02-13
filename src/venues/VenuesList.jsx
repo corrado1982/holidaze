@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
 import VenuesCards from "./VenuesCards";
 // + "?limit=10"
-const url = BASE_URL + VENUES;
+const url = BASE_URL + VENUES + "?sort=created&sortOrder=desc";
 
 function VenuesList() {
   const [posts, setPosts] = useState([]);
