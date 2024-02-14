@@ -168,13 +168,17 @@ function MyVenuePage() {
             <p className="  text-l px-3 pb-3 truncate overflow-hidden ">
               {product.description}
             </p>
+            <Link
+              to={"myvenuedetail/" + product.id}
+              className="btn-primary"
+              key={product.id}
+              post={product}
+            >
+              Details
+            </Link>
           </div>
         </div>
       ))}
-
-      {/* <Link to={"/createvenue"} className="btn-primary m-auto my-10 flex">
-        New Venue
-      </Link> */}
     </div>
   );
 }

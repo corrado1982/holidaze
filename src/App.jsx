@@ -16,6 +16,7 @@ import MyVenue from "./pages/MyVenuePage";
 import MyBookingsPage from "./pages/MyBookingsPage";
 import MyVenuePage from "./pages/MyVenuePage";
 import CreateVenue from "./pages/CreateVenue";
+import MyVenueDetailPage from "./pages/MyVenueDetailPage";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
           <Route path="avatar" element={<Avatar />} />
           <Route path="mybookings" element={<MyBookingsPage />} />
           <Route path="myvenue" element={<MyVenuePage />} />
+          <Route
+            path="myvenue/myvenuedetail/:id"
+            element={<MyVenueDetailPage />}
+          />
           <Route path="createvenue" element={<CreateVenue />} />
 
           <Route path="venue/:id" element={<VenuePage />} />
