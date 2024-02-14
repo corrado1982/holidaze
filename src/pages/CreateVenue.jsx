@@ -37,6 +37,22 @@ const schema = yup
     price: yup.number().required("Please enter a price"),
 
     maxGuests: yup.number().required("How many Guests?"),
+
+    meta: yup.object({
+      wifi: yup.boolean(),
+      parking: yup.boolean(),
+      breakfast: yup.boolean(),
+      pets: yup.boolean(),
+    }),
+    location: yup.object({
+      address: yup.string(),
+      city: yup.string(),
+      zip: yup.string(),
+      country: yup.string(),
+      continent: yup.string(),
+      // lat: yup.number().min(-90).max(90),
+      // lng: yup.number().min(-180).max(180),
+    }),
   })
   .required();
 function CreateVenue() {
@@ -112,12 +128,96 @@ function CreateVenue() {
           <p>{errors.maxGuests?.message}</p>
         </div>
 
-        {/* <div className="flex justify-center">
-          <input {...register("venueManager")} type="checkbox" className="" />
-          <label htmlFor="checkbox" className="">
-            Register as a manager
+        {/* OPTIONAL */}
+
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="location.address">
+            Address
           </label>
-        </div> */}
+          <input
+            {...register("location.address")}
+            type="text"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
+          <p>{errors.address?.message}</p>
+        </div>
+
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="location.city">
+            City
+          </label>
+          <input
+            {...register("location.city")}
+            type="text"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
+          <p>{errors.city?.message}</p>
+        </div>
+
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="location.zip">
+            Zip
+          </label>
+          <input
+            {...register("location.zip")}
+            type="text"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
+          <p>{errors.zip?.message}</p>
+        </div>
+
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="location.country">
+            Country
+          </label>
+          <input
+            {...register("location.country")}
+            type="text"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
+          <p>{errors.country?.message}</p>
+        </div>
+
+        <div className="flex flex-col ">
+          <label className="m-auto" htmlFor="location.continent">
+            Continent
+          </label>
+          <input
+            {...register("location.continent")}
+            type="text"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
+          <p>{errors.continent?.message}</p>
+        </div>
+
+        {/* CheckBox */}
+        <div className="flex justify-center">
+          <input {...register("meta.wifi")} type="checkbox" className="" />
+          <label htmlFor="checkbox" className="">
+            wifi
+          </label>
+        </div>
+
+        <div className="flex justify-center">
+          <input {...register("meta.breakfast")} type="checkbox" className="" />
+          <label htmlFor="checkbox" className="">
+            breakfast
+          </label>
+        </div>
+
+        <div className="flex justify-center">
+          <input {...register("meta.parking")} type="checkbox" className="" />
+          <label htmlFor="checkbox" className="">
+            parking
+          </label>
+        </div>
+
+        <div className="flex justify-center">
+          <input {...register("meta.pets")} type="checkbox" className="" />
+          <label htmlFor="checkbox" className="">
+            pets
+          </label>
+        </div>
 
         <button type="submit" className="btn-primary m-auto my-10 flex">
           Create
