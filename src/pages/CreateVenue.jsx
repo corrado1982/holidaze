@@ -38,6 +38,13 @@ const schema = yup
 
     maxGuests: yup.number().required("How many Guests?"),
 
+    rating: yup
+      .number()
+      .nullable()
+      .transform((value) => (isNaN(value) ? 0 : value))
+      .max(5)
+      .optional(),
+
     meta: yup.object({
       wifi: yup.boolean(),
       parking: yup.boolean(),
@@ -188,6 +195,18 @@ function CreateVenue() {
             className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
           />
           <p>{errors.continent?.message}</p>
+        </div>
+
+        <div className="flex flex-col ">
+          <label htmlFor="rating" className="m-auto">
+            Rating (max 5)
+          </label>
+          <input
+            {...register("rating")}
+            type="number"
+            className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
+          />
+          <p>{errors.rating?.message}</p>
         </div>
 
         {/* CheckBox */}
