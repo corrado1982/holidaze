@@ -27,12 +27,11 @@ function MyVenueDetailPage() {
   let { id } = useParams();
   const url = BASE_URL + "/venues/" + id + "?_owner=true&_bookings=true";
   const [posts, setPosts] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
-
   const [isError, setIsError] = useState(false);
-
   const [showPage, setShowPage] = useState(false);
+
+  const [name, setName] = useState(posts.name);
 
   useEffect(() => {
     async function getData() {
@@ -56,6 +55,27 @@ function MyVenueDetailPage() {
 
     getData();
   }, []);
+  async function onSubmit(event) {
+    event.preventDefault();
+    const body = { name };
+
+    console.log("data: " + body);
+    console.log("id : " + id);
+
+    const response = await fetch(BASE_URL + "/venues/" + id, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+
+    console.log(response);
+  }
+  function onNameChange(event) {
+    setName(event.target.value);
+  }
   if (isLoading) {
     return <div>Loading posts</div>;
   }
@@ -64,64 +84,68 @@ function MyVenueDetailPage() {
     return <div>Error loading data</div>;
   }
   if (showPage) {
-    const {
-      id,
-      name,
-      description,
-      media,
-      owner,
-      meta,
-      location,
-      maxGuests,
-      bookings,
-      rating,
-      price,
-    } = posts;
-    console.log(posts);
+    // const {
+    //   id,
+    //   name,
+    //   description,
+    //   media,
+    //   owner,
+    //   meta,
+    //   location,
+    //   maxGuests,
+    //   bookings,
+    //   rating,
+    //   price,
+    // } = posts;
+    // console.log(posts);
     return (
       // NEW AS EXPERIMENT
       <div>
         <Link to={"/myvenue"}>Back</Link>
         <h1>Single Venue</h1>
-        <form onSubmit={submitModifiedVenue}>
+        <form onSubmit={onSubmit}>
           <div className=" bg-sky-50 rounded-lg shadow-xl">
             <div className="flex justify-around flex-wrap m-5"></div>
             <div className="flex items-center flex-col">
-              <input type="text" defaultValue={name} />
+              <input
+                type="text"
+                defaultValue={posts.name}
+                onChange={onNameChange}
+              />
               <h2>{name + ",   id: " + id}</h2>
 
-              <div className="flex flex-wrap m-2">
+              {/* <div className="flex flex-wrap m-2">
                 {media.map((pic) => (
                   <div key={pic}>
                     <img src={pic} alt="venue pic" className="h-48 m-2"></img>
                     <input type="url" defaultValue={pic} />
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
             {/* Icons */}
             <div className="flex flex-row justify-evenly m-3 flex-wrap">
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <p>Brakfast: </p>
                 <div className="flex">
                   {meta.breakfast ? (
-                    <>
+                    <div>
                       <input type="checkbox" defaultValue={true} />
-                      {/* <img src="../../public/Icon-check.png" /> */}
-                    </>
+               
+                    </div>
                   ) : (
-                    <>
+                    <div>
                       <input type="checkbox" defaultValue={false} />
-                      {/* <img src="../../public/Icon-close.png" /> */}
-                    </>
+                   
+                    </div>
                   )}
                   <img
                     src="../../public/Icon-breakfast.png"
                     className="ml-4 sm-icons"
                   ></img>
                 </div>
-              </div>
-              <div className="flex justify-between">
+              </div> */}
+              {/* <div className="flex justify-between">
                 <p>Parking: </p>
                 <div className="flex">
                   {meta.parking ? (
@@ -134,8 +158,8 @@ function MyVenueDetailPage() {
                     className="ml-4 sm-icons"
                   ></img>
                 </div>
-              </div>
-              <div className="flex justify-between">
+              </div> */}
+              {/* <div className="flex justify-between">
                 <p>Pets: </p>
                 <div className="flex">
                   {meta.pets ? (
@@ -148,8 +172,8 @@ function MyVenueDetailPage() {
                     className="ml-4 sm-icons"
                   ></img>
                 </div>
-              </div>
-              <div className="flex justify-between">
+              </div> */}
+              {/* <div className="flex justify-between">
                 <p>Wifi: </p>
                 <div className="flex">
                   {meta.wifi ? (
@@ -162,8 +186,8 @@ function MyVenueDetailPage() {
                     className="ml-4 sm-icons"
                   ></img>
                 </div>
-              </div>
-              <div className="flex justify-between">
+              </div> */}
+              {/* <div className="flex justify-between">
                 <p>Guests: </p>
                 <div className="flex">
                   <p>{maxGuests}</p>
@@ -172,9 +196,9 @@ function MyVenueDetailPage() {
                     className="ml-6 sm-icons"
                   ></img>
                 </div>
-              </div>
+              </div> */}
             </div>
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <p className="my-5 mx-14 stronger-text">Price: {price} NOK</p>
               <div className="flex m-5 mx-14">
                 <p className="stronger-text">{rating}</p>
@@ -185,8 +209,8 @@ function MyVenueDetailPage() {
                 />
               </div>
             </div>
-            <hr />
-            <div className="flex justify-between flex-wrap">
+            <hr /> */}
+            {/* <div className="flex justify-between flex-wrap">
               <div className="mx-14 my-5">
                 <p className="stronger-text">Location:</p>
                 <p>{location.address},</p>
@@ -197,8 +221,8 @@ function MyVenueDetailPage() {
                 <p className="stronger-text">About the place:</p>
                 <p>{description}</p>
               </div>
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <h2>Bokings:</h2>
               <div className=" bg-sky-100 rounded-lg shadow-xl">
                 {bookings.map((book) => (
@@ -210,7 +234,7 @@ function MyVenueDetailPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
             <button onClick={() => removeVanue(id)}>
               <Link to={"/myvenue"} className="btn-primary">
                 Delete
@@ -223,7 +247,9 @@ function MyVenueDetailPage() {
           </div>
         </form>
       </div>
+
       // OLD TO KEEP
+
       // <div>
       //   <Link to={"/myvenue"}>Back</Link>
       //   <h1>Single Venue</h1>

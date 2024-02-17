@@ -10,7 +10,7 @@ const token = storage.load("token");
 // accomme a cosa
 export async function submitModifiedVenue(data) {
   //   let { id } = useParams();
-  //   event.preventDefault();
+  event.preventDefault();
   //   const post = stringify(data);
 
   //   event.preventDefault();
