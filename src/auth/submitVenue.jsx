@@ -5,6 +5,7 @@ const token = storage.load("token");
 
 export async function submitVenue(data) {
   event.preventDefault();
+
   console.log(data);
   const response = await fetch(BASE_URL + "/venues", {
     headers: {

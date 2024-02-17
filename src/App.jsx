@@ -17,6 +17,8 @@ import MyBookingsPage from "./pages/MyBookingsPage";
 import MyVenuePage from "./pages/MyVenuePage";
 import CreateVenue from "./pages/CreateVenue";
 import MyVenueDetailPage from "./pages/MyVenueDetailPage";
+import ModifyMyVenue from "./pages/UpdateVenue";
+import UpdateVenue from "./pages/UpdateVenue";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
             path="myvenue/myvenuedetail/:id"
             element={<MyVenueDetailPage />}
           />
+          <Route path="myvenue/modifymyvenue/:id" element={<UpdateVenue />} />
+
           <Route path="createvenue" element={<CreateVenue />} />
 
           <Route path="venue/:id" element={<VenuePage />} />
