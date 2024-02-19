@@ -8,7 +8,7 @@ const token = storage.load("token");
 // let { id } = useParams();
 // mo faccio
 // accomme a cosa
-export async function submitModifiedVenue(data) {
+export async function submitModifiedVenue(id, data) {
   //   let { id } = useParams();
   event.preventDefault();
   //   const post = stringify(data);

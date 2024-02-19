@@ -3,6 +3,7 @@ import * as storage from "../storage/index";
 import { BASE_URL } from "../constants/api";
 import { Link, json } from "react-router-dom";
 
+import viteLogo from "/vite.svg";
 const user = storage.load("username");
 const token = storage.load("token");
 const url = BASE_URL + "/profiles/" + user + "/venues";
@@ -168,6 +169,12 @@ function MyVenuePage() {
             <p className="  text-l px-3 pb-3 truncate overflow-hidden ">
               {product.description}
             </p>
+            <Link
+              to={"/myvenue/modifymyvenue/" + product.id}
+              className="btn-primary"
+            >
+              modify page
+            </Link>
             <Link
               to={"myvenuedetail/" + product.id}
               className="btn-primary"
