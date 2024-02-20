@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import { isItLogged } from "./isItLogged";
-// import BookingVenueConfirm from "./modal/bookingVenueConfirm";
+import BookingVenueConfirm from "./modal/bookingVenueConfirm";
 
 const url = BASE_URL + "/bookings";
 
@@ -110,18 +110,6 @@ function BookingForm(props) {
   //   return book.dateFrom;
   //   console.log(allBooking);
 
-  // PROVA NEW FOREACH
-  //   var startBooking = [];
-  //   var endBooking = [];
-  //   bookings.forEach(giveMeBookings);
-
-  //   function giveMeBookings(item) {
-  //     startBooking = item.dateFrom;
-  //     endBooking = item.dateTo;
-  //   }
-  //   console.log(startBooking);
-  //   console.log(endBooking);
-
   function handleGuestQuantity(event) {
     const value = event.target.value;
     if (event.target.name === "quantity") {
@@ -131,11 +119,11 @@ function BookingForm(props) {
   //   console.log("book" + allBooking);
   return (
     <div>
-      {/* {okResponse && (
+      {okResponse && (
         <div>
           <BookingVenueConfirm />
         </div>
-      )} */}
+      )}
 
       <div>
         {/* {" "}
@@ -167,45 +155,22 @@ function BookingForm(props) {
               required
             ></input>
 
-            {/* <DatePicker
-          dateFormat="dd/MM/yyyy"
-          selected={dateFrom}
-          onChange={(date) => setDateFrom(date)}
-          //   filterDate={isWeekday}
-          excludeDates={[new Date(), 3]}
-          //   minDate={new Date()}
-          required
-        />
-
-        <DatePicker
-          dateFormat="dd/MM/yyyy"
-          selected={dateTo}
-          onChange={(date) => setDateTo(date)}
-          minDate={new Date()}
-          required
-        /> */}
-            {/* {bookings.forEach(
-          (book) => ((mnDate = book.dateFrom), (mxDate = book.dateTo))
-        )} */}
             <DatePicker
               selected={dateFrom}
               onChange={onChange}
               startDate={dateFrom}
               endDate={dateTo}
-              //   excludeDates={isWeekday}
-              //   minDate={mxDate}
-              //   maxDate={mnDate}
               selectsRange
               selectsDisabledDaysInRange
               inline
               required
             />
-            {/* <button className=" btn-primary mx-auto my-10"> */}
-            {/* Book it */}
-            <Link to="/mybookings" className=" btn-primary mx-auto my-10">
+            <button className=" btn-primary mx-auto my-10">
               Book it
-            </Link>
-            {/* </button> */}
+              {/* <Link to="/mybookings" className=" btn-primary mx-auto my-10">
+              Book it
+            </Link> */}
+            </button>
           </form>
         ) : (
           <div></div>
