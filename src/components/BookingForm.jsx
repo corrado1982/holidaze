@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, json, useParams } from "react-router-dom";
+// import { Link, json, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
@@ -119,11 +119,11 @@ function BookingForm(props) {
   //   console.log("book" + allBooking);
   return (
     <div>
-      {okResponse && (
+      {/* {okResponse && (
         <div>
           <BookingVenueConfirm />
         </div>
-      )}
+      )} */}
 
       <div>
         {/* {" "}
@@ -176,6 +176,11 @@ function BookingForm(props) {
           <div></div>
         )}
       </div>
+      {okResponse && (
+        <div>
+          <BookingVenueConfirm />
+        </div>
+      )}
     </div>
   );
 }
