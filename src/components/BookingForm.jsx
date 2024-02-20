@@ -136,12 +136,22 @@ function BookingForm(props) {
           </li>
         ))}
       </ul> */}
+        {okResponse && (
+          <div>
+            Response is Ok!
+            <Link to="/mybookings" className=" btn-primary mx-auto my-10">
+              GO to My Bookings
+            </Link>
+            {/* <BookingVenueConfirm /> */}
+          </div>
+        )}
         {isItLogged() ? (
           <form
             className="flex flex-col items-center"
             onSubmit={onBookingSubmit}
           >
             {/* onSubmit={onBookingSubmit} */}
+
             <label htmlFor="quantity">
               Guests: (between 1 and {maxGuests}):
             </label>
@@ -176,15 +186,6 @@ function BookingForm(props) {
           <div></div>
         )}
       </div>
-      {okResponse && (
-        <div>
-          Response is Ok!
-          <Link to="/mybookings" className=" btn-primary mx-auto my-10">
-            GO to My Bookings
-          </Link>
-          {/* <BookingVenueConfirm /> */}
-        </div>
-      )}
     </div>
   );
 }
