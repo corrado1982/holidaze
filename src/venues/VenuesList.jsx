@@ -3,6 +3,7 @@ import { BASE_URL, VENUES } from "../constants/api";
 import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
 import VenuesCards from "./VenuesCards";
+import VenuesFilter from "./VenuesFilter";
 // + "?limit=10"
 const url = BASE_URL + VENUES + "?sort=created&sortOrder=desc";
 
@@ -44,10 +45,13 @@ function VenuesList() {
   console.log(posts);
 
   return (
-    <div className="mt-6 px-4 grid grid-cols-3 gap-x-12 gap-y-10">
-      {posts.map((post) => (
-        <VenuesCards key={post.id} post={post} />
-      ))}
+    <div>
+      <VenuesFilter posts={posts} />
+      <div className="mt-6 px-4 grid grid-cols-3 gap-x-12 gap-y-10">
+        {posts.map((post) => (
+          <VenuesCards key={post.id} post={post} />
+        ))}
+      </div>
     </div>
   );
 }
