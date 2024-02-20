@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-// import { Link, json, useParams } from "react-router-dom";
+import { Link, json, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import { isItLogged } from "./isItLogged";
-import BookingVenueConfirm from "./modal/bookingVenueConfirm";
+// import BookingVenueConfirm from "./modal/bookingVenueConfirm";
 
 const url = BASE_URL + "/bookings";
 
@@ -178,7 +178,11 @@ function BookingForm(props) {
       </div>
       {okResponse && (
         <div>
-          <BookingVenueConfirm />
+          Response is Ok!
+          <Link to="/mybookings" className=" btn-primary mx-auto my-10">
+            GO to My Bookings
+          </Link>
+          {/* <BookingVenueConfirm /> */}
         </div>
       )}
     </div>
