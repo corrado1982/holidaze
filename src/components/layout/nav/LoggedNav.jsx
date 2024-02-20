@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { isManager } from "../../isItLogged";
 // import { logout } from "../../../auth/logout";
 import * as storage from "../../../storage/index";
@@ -32,7 +32,7 @@ function LoggedNav() {
     <nav className="flex">
       <div className="relative ml-3 flex justify-between p-2 w-11/12 items-center">
         <div>
-          <Link to="/">Holidaze</Link>
+          <NavLink to="/">Holidaze</NavLink>
         </div>
         <div className="flex items-center">
           <p>Welcome back: {userName}</p>
@@ -65,7 +65,7 @@ function LoggedNav() {
             >
               {/* AVATAR */}
               <div>
-                <Link
+                <NavLink
                   to="/avatar"
                   className="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
@@ -73,12 +73,12 @@ function LoggedNav() {
                   id="user-menu-item-0"
                 >
                   Avatar
-                </Link>
+                </NavLink>
               </div>
 
               {/* MY BOOKINGS */}
               <div>
-                <Link
+                <NavLink
                   to="/mybookings"
                   className="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
@@ -86,13 +86,13 @@ function LoggedNav() {
                   id="user-menu-item-1"
                 >
                   My Bookings
-                </Link>
+                </NavLink>
               </div>
 
               {/* MY VENUE */}
               {isManager() && (
                 <div>
-                  <Link
+                  <NavLink
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
@@ -100,7 +100,7 @@ function LoggedNav() {
                     to="/myvenue"
                   >
                     My venue
-                  </Link>
+                  </NavLink>
                 </div>
               )}
 
