@@ -27,4 +27,9 @@ export async function submitModifiedVenue(id, data) {
   });
 
   console.log(response);
+  if (response.ok) {
+    window.location.href = "/";
+  }
+
+  // return response;
 }
