@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-// import { Link, json, useParams } from "react-router-dom";
+import { Link, json, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import { isItLogged } from "./isItLogged";
-import BookingVenueConfirm from "./modal/bookingVenueConfirm";
+// import BookingVenueConfirm from "./modal/bookingVenueConfirm";
 
 const url = BASE_URL + "/bookings";
 
@@ -131,11 +131,11 @@ function BookingForm(props) {
   //   console.log("book" + allBooking);
   return (
     <div>
-      {okResponse && (
+      {/* {okResponse && (
         <div>
           <BookingVenueConfirm />
         </div>
-      )}
+      )} */}
 
       <div>
         {/* {" "}
@@ -200,12 +200,12 @@ function BookingForm(props) {
               inline
               required
             />
-            <button className=" btn-primary mx-auto my-10">
+            {/* <button className=" btn-primary mx-auto my-10"> */}
+            {/* Book it */}
+            <Link to="/mybookings" className=" btn-primary mx-auto my-10">
               Book it
-              {/* <Link to="/mybookings" className=" btn-primary mx-auto my-10">
-              Book it
-            </Link> */}
-            </button>
+            </Link>
+            {/* </button> */}
           </form>
         ) : (
           <div></div>
