@@ -1,24 +1,5 @@
 import React from "react";
 import { removePost } from "../pages/MyBookingsPage";
-// import * as storage from "../storage/index";
-// import { BASE_URL } from "../constants/api";
-// import MyBookingsPage from "../pages/MyBookingsPage";
-
-// const url = BASE_URL + "/bookings/"+ id;
-
-// const token = storage.load("token");
-
-// export async function removePost(id) {
-//   const url = BASE_URL + "/bookings/" + id;
-//   const response = await fetch(url, {
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//     method: "DELETE",
-//   });
-//   console.log(response);
-// }
 
 function MyBookings(props) {
   const { venue, dateFrom, dateTo, id } = props.post;
@@ -27,7 +8,7 @@ function MyBookings(props) {
     <div className="my-5 card-bg mx-auto flex justify-around" key={id}>
       <img
         src={venue.media[0]}
-        alt=""
+        alt={venue.name}
         className=" h-24 w-24 object-fill rounded-lg m-2"
       />
       <div className="flex">

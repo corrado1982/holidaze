@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import { isItLogged } from "./isItLogged";
+import BookingVenueConfirm from "./modal/bookingVenueConfirm";
 
 const url = BASE_URL + "/bookings";
 
@@ -14,11 +15,12 @@ function BookingForm(props) {
   const [dateFrom, setDateFrom] = useState(new Date());
   const [dateTo, setDateTo] = useState(null);
   const [guests, setGuests] = useState(0);
+  const [okResponse, setOkResponse] = useState(false);
 
-  const isWeekday = (date) => {
-    const day = getDay(date);
-    return day !== 0 && day !== 6;
-  };
+  // const isWeekday = (date) => {
+  //   const day = getDay(date);
+  //   return day !== 0 && day !== 6;
+  // };
 
   //   let bookedStart = [];
   //   let allBooking = [];
@@ -63,9 +65,14 @@ function BookingForm(props) {
       method: "POST",
       body: JSON.stringify(data),
     });
-    console.log(response);
-  }
 
+    console.log(response);
+    {
+      response.ok && setOkResponse(true);
+    }
+    // bookingVenueConfirm();
+  }
+  console.log(okResponse);
   //   function bookedDates() {
   //     return (
   //       <div>
@@ -86,19 +93,19 @@ function BookingForm(props) {
   //   let bookedStart = "";
   //   let allBooking = [];
   //   const bookedDates =
-  bookings.map(function (book, index) {
-    // allBooking = book.dateTo + book.dateTo + index;
-    // bookedStart += book.dateFrom;
-    // bookedEnd += book.dateTo;
-    // startBooking.push(book.dateFrom);
-    // endBooking.push(book.dateTo);
-    // console.log(startBooking);
-    // console.log(endBooking);
-    // console.log("from: " + book.dateFrom + index);
-    // console.log("to: " + book.dateTo);
-    // console.log(book.dateTo + book.index);
-    //     if (book) return book.dateFrom;
-  });
+  // bookings.map(function (book, index) {
+  // allBooking = book.dateTo + book.dateTo + index;
+  // bookedStart += book.dateFrom;
+  // bookedEnd += book.dateTo;
+  // startBooking.push(book.dateFrom);
+  // endBooking.push(book.dateTo);
+  // console.log(startBooking);
+  // console.log(endBooking);
+  // console.log("from: " + book.dateFrom + index);
+  // console.log("to: " + book.dateTo);
+  // console.log(book.dateTo + book.index);
+  //     if (book) return book.dateFrom;
+  // });
   //   console.log("from: " + book.dateFrom);
   //   return book.dateFrom;
   //   console.log(allBooking);
@@ -124,7 +131,14 @@ function BookingForm(props) {
   //   console.log("book" + allBooking);
   return (
     <div>
-      {/* {" "}
+      {okResponse && (
+        <div>
+          <BookingVenueConfirm />
+        </div>
+      )}
+
+      <div>
+        {/* {" "}
       <ul>
         {bookings.map((book) => (
           <li key={book.id}>
@@ -134,21 +148,26 @@ function BookingForm(props) {
           </li>
         ))}
       </ul> */}
-      {isItLogged() ? (
-        <form className="flex flex-col items-center">
-          {/* onSubmit={onBookingSubmit} */}
-          <label htmlFor="quantity">Guests: (between 1 and {maxGuests}):</label>
-          <input
-            className="my-5"
-            type="number"
-            name="quantity"
-            min="1"
-            max={maxGuests}
-            onChange={handleGuestQuantity}
-            required
-          ></input>
+        {isItLogged() ? (
+          <form
+            className="flex flex-col items-center"
+            onSubmit={onBookingSubmit}
+          >
+            {/* onSubmit={onBookingSubmit} */}
+            <label htmlFor="quantity">
+              Guests: (between 1 and {maxGuests}):
+            </label>
+            <input
+              className="my-5"
+              type="number"
+              name="quantity"
+              min="1"
+              max={maxGuests}
+              onChange={handleGuestQuantity}
+              required
+            ></input>
 
-          {/* <DatePicker
+            {/* <DatePicker
           dateFormat="dd/MM/yyyy"
           selected={dateFrom}
           onChange={(date) => setDateFrom(date)}
@@ -165,30 +184,33 @@ function BookingForm(props) {
           minDate={new Date()}
           required
         /> */}
-          {/* {bookings.forEach(
+            {/* {bookings.forEach(
           (book) => ((mnDate = book.dateFrom), (mxDate = book.dateTo))
         )} */}
-          <DatePicker
-            selected={dateFrom}
-            onChange={onChange}
-            startDate={dateFrom}
-            endDate={dateTo}
-            //   excludeDates={isWeekday}
-            //   minDate={mxDate}
-            //   maxDate={mnDate}
-            selectsRange
-            selectsDisabledDaysInRange
-            inline
-          />
-          <button onClick={onBookingSubmit}>
-            <Link to="/mybookings" className=" btn-primary mx-auto my-10">
+            <DatePicker
+              selected={dateFrom}
+              onChange={onChange}
+              startDate={dateFrom}
+              endDate={dateTo}
+              //   excludeDates={isWeekday}
+              //   minDate={mxDate}
+              //   maxDate={mnDate}
+              selectsRange
+              selectsDisabledDaysInRange
+              inline
+              required
+            />
+            <button className=" btn-primary mx-auto my-10">
               Book it
-            </Link>
-          </button>
-        </form>
-      ) : (
-        <div></div>
-      )}
+              {/* <Link to="/mybookings" className=" btn-primary mx-auto my-10">
+              Book it
+            </Link> */}
+            </button>
+          </form>
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 }
