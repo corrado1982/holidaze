@@ -169,12 +169,12 @@ function MyVenuePage() {
             <p className="  text-l px-3 pb-3 truncate overflow-hidden ">
               {product.description}
             </p>
-            <Link
+            {/* <Link
               to={"/myvenue/modifymyvenue/" + product.id}
               className="btn-primary"
             >
               modify page
-            </Link>
+            </Link> */}
             <Link
               to={"myvenuedetail/" + product.id}
               className="btn-primary"
