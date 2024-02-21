@@ -13,24 +13,24 @@ const token = storage.load("token");
 
 // const urlRemove = BASE_URL + "/bookings/" + id;
 
-export async function removePost(id) {
-  const urlRemove = BASE_URL + "/bookings/" + id;
-  const response = await fetch(urlRemove, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    method: "DELETE",
-  });
-  // setRemove(true);
-  console.log(response);
+// export async function removePost(id) {
+//   const urlRemove = BASE_URL + "/bookings/" + id;
+//   const response = await fetch(urlRemove, {
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//     },
+//     method: "DELETE",
+//   });
+//   // setRemove(true);
+//   console.log(response);
 
-  if (response.ok) {
-    // MyBookings;
-    alert("Your booking is deleteted");
-    location.href = "/";
-  }
-}
+//   if (response.ok) {
+//     // MyBookings;
+//     alert("Your booking is deleteted");
+//     location.href = "/";
+//   }
+// }
 // async function removePost() {
 //   setRemove(true);
 // }
