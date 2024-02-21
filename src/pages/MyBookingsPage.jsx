@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import MyBookings from "../components/MyBookings";
+import { Link } from "react-router-dom";
+import { getDate } from "date-fns";
 
 const user = storage.load("username");
 const url =
@@ -12,8 +14,6 @@ const token = storage.load("token");
 // const urlRemove = BASE_URL + "/bookings/" + id;
 
 export async function removePost(id) {
-  // const [remove, setRemove] = useState(false);
-
   const urlRemove = BASE_URL + "/bookings/" + id;
   const response = await fetch(urlRemove, {
     headers: {
@@ -22,7 +22,14 @@ export async function removePost(id) {
     },
     method: "DELETE",
   });
+  // setRemove(true);
   console.log(response);
+
+  if (response.ok) {
+    // MyBookings;
+    alert("Your booking is deleteted");
+    location.href = "/";
+  }
 }
 // async function removePost() {
 //   setRemove(true);
@@ -33,6 +40,8 @@ function MyBookingsPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [isError, setIsError] = useState(false);
+
+  // const [remove, setRemove] = useState(false);
 
   // const [remove, setRemove] = useState(false);
   // remove = false;
