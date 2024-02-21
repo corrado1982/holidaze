@@ -24,7 +24,7 @@ const updateVenueSchema = yup
         Array.isArray(originalValue)
           ? originalValue
           : value
-          ? [value]
+          ? value.split(",").map((media) => media.trim())
           : [defaultMedia]
       )
       .optional(),
