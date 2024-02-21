@@ -6,8 +6,8 @@ import * as storage from "../storage/index";
 const token = storage.load("token");
 
 function MyBookings(props) {
-  const { venue, dateFrom, dateTo, id } = props.post;
-  const [bookings, setBookings] = useState([props.post]);
+  // const { venue, dateFrom, dateTo, id } = props.post;
+  const [bookings, setBookings] = useState(props.posts);
   // console.log(bookings.id);
   // console.log(props);
   async function removePost(id) {
@@ -35,40 +35,48 @@ function MyBookings(props) {
   console.log(bookings);
   console.log(props.post);
   return (
-    <>
-      {/* {bookings.map((post) => ( */}
-      <div className="my-5 card-bg mx-auto flex justify-around" key={id}>
-        <img
-          src={venue.media[0]}
-          alt={venue.name}
-          className=" h-24 w-24 object-fill rounded-lg m-2"
-        />
-        <div className="flex">
-          <div className="flex flex-col justify-between">
+    <div>
+      {bookings.map((booking) => (
+        <div
+          className="my-5 card-bg mx-auto flex justify-around"
+          key={booking.id}
+        >
+          <img
+            src={booking.venue.media[0]}
+            alt={booking.venue.name}
+            className=" h-24 w-24 object-fill rounded-lg m-2"
+          />
+          {/* <img
+            src={venue.media[0]}
+            alt={venue.name}
+            className=" h-24 w-24 object-fill rounded-lg m-2"
+          /> */}
+          <div className="flex">
+            <div className="flex flex-col justify-between">
+              <div>
+                <h2 className=" w-80">{booking.venue.name}</h2>
+              </div>
+              <div className="mb-2">
+                <p>from: {booking.dateFrom}</p>
+                <p>to: {booking.dateTo}</p>
+              </div>
+              <button
+                onClick={() => removePost(booking.id)}
+                className="btn-primary m-auto my-3"
+              >
+                Delete
+              </button>
+            </div>
             <div>
-              <h2 className=" w-80">{venue.name}</h2>
+              <p>{booking.venue.location.address}</p>
+              <p>{booking.venue.location.zip}</p>
+              <p>{booking.venue.location.city}</p>
+              <p>{booking.venue.location.country}</p>
             </div>
-            <div className="mb-2">
-              <p>from: {dateFrom}</p>
-              <p>to: {dateTo}</p>
-            </div>
-            <button
-              onClick={() => removePost(id)}
-              className="btn-primary m-auto my-3"
-            >
-              Delete
-            </button>
-          </div>
-          <div>
-            <p>{venue.location.address}</p>
-            <p>{venue.location.zip}</p>
-            <p>{venue.location.city}</p>
-            <p>{venue.location.country}</p>
           </div>
         </div>
-      </div>
-      {/* ))} */}
-    </>
+      ))}
+    </div>
   );
 }
 export default MyBookings;

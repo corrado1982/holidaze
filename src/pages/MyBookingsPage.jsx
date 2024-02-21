@@ -86,9 +86,7 @@ function MyBookingsPage() {
     <>
       <h1>My Bookings</h1>
       <div className="bg-sky-50 rounded-lg shadow-xl size-4/5 m-auto">
-        {posts.map((post) => (
-          <MyBookings key={post.id} post={post} />
-        ))}
+        <MyBookings key={posts.id} posts={posts} />
       </div>
     </>
   );
