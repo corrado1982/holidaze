@@ -17,4 +17,8 @@ export async function submitVenue(data) {
   });
 
   console.log(response);
+  if (response.ok) {
+    alert("Your venue is created");
+    location.href = "/";
+  }
 }

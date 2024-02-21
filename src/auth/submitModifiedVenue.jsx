@@ -28,7 +28,7 @@ export async function submitModifiedVenue(id, data) {
 
   console.log(response);
   if (response.ok) {
-    alert("Modified");
+    alert("Modified! Please go back to My Venue");
     // window.location.href = "/";
   }
 
