@@ -119,7 +119,7 @@ function MyVenueDetailPage() {
     return (
       // NEW AS EXPERIMENT
       <div>
-        <Link to={"/myvenue"}>Back</Link>
+        <Link to={"/myvenue"}>my venues/...</Link>
         <h1>Single Venue</h1>
         {/* <form onSubmit={onSubmit}> */}
         <div className=" bg-sky-50 rounded-lg shadow-xl">
