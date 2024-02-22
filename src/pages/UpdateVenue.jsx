@@ -16,7 +16,9 @@ const updateVenueSchema = yup
       .trim()
       .min(3, "Your first name should be at least 3 characters.")
       .max(100, "Your first name cannot be longer than 10 characters."),
+
     description: yup.string().trim(),
+
     media: yup
       .array()
       .nullable()
@@ -29,14 +31,15 @@ const updateVenueSchema = yup
       )
       .optional(),
 
-    price: yup.number(),
+    price: yup.number().min(1),
 
-    maxGuests: yup.number(),
+    maxGuests: yup.number().min(1),
 
     rating: yup
       .number()
       .nullable()
       .transform((value) => (isNaN(value) ? 0 : value))
+      .min(0)
       .max(5)
       .optional(),
 
