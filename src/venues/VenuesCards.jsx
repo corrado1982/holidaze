@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
+import checkIcon from "../../public/Icon-check.png";
 
 function VenuesCards(props) {
   const {
@@ -40,7 +41,7 @@ function VenuesCards(props) {
                 <p>Brakfast: </p>
                 <div className="flex">
                   {meta.breakfast ? (
-                    <img src="../../public/Icon-check.png" />
+                    <img src={checkIcon} />
                   ) : (
                     <img src="../../public/Icon-close.png" />
                   )}
