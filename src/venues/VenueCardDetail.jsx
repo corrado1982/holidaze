@@ -1,4 +1,13 @@
 import React from "react";
+import viteLogo from "/src/vite.svg";
+import checkIcon from "../../public/Icon-check.png";
+import closIcon from "../../public/Icon-close.png";
+import breakfastIcon from "../../public/Icon-breakfast.png";
+import parkingIcon from "../../public/Icon-parking.png";
+import petsIcon from "../../public/Icon-pets.png";
+import wifiIcon from "../../public/Icon-wifi.png";
+import personIcon from "../../public/Icon-person.png";
+import starIcon from "../../public/Icon-star.png";
 
 function VenueCardDetail(props) {
   const {
@@ -51,13 +60,10 @@ function VenueCardDetail(props) {
         <div className="flex justify-between">
           <p>Brakfast: </p>
           <div className="flex">
-            {meta.breakfast ? (
-              <img src="../../public/Icon-check.png" />
-            ) : (
-              <img src="../../public/Icon-close.png" />
-            )}
+            {meta.breakfast ? <img src={checkIcon} /> : <img src={checkIcon} />}
             <img
-              src="../../public/Icon-breakfast.png"
+              src={breakfastIcon}
+              alt="breakfastIcon"
               className="ml-4 sm-icons"
             ></img>
           </div>
@@ -65,13 +71,10 @@ function VenueCardDetail(props) {
         <div className="flex justify-between">
           <p>Parking: </p>
           <div className="flex">
-            {meta.parking ? (
-              <img src="../../public/Icon-check.png" />
-            ) : (
-              <img src="../../public/Icon-close.png" />
-            )}
+            {meta.parking ? <img src={checkIcon} /> : <img src={checkIcon} />}
             <img
-              src="../../public/Icon-parking.png"
+              src={parkingIcon}
+              alt="parkingIcon"
               className="ml-4 sm-icons"
             ></img>
           </div>
@@ -79,29 +82,15 @@ function VenueCardDetail(props) {
         <div className="flex justify-between">
           <p>Pets: </p>
           <div className="flex">
-            {meta.pets ? (
-              <img src="../../public/Icon-check.png" />
-            ) : (
-              <img src="../../public/Icon-close.png" />
-            )}
-            <img
-              src="../../public/Icon-pets.png"
-              className="ml-4 sm-icons"
-            ></img>
+            {meta.pets ? <img src={checkIcon} /> : <img src={checkIcon} />}
+            <img src={petsIcon} alt="petsIcon" className="ml-4 sm-icons"></img>
           </div>
         </div>
         <div className="flex justify-between">
           <p>Wifi: </p>
           <div className="flex">
-            {meta.wifi ? (
-              <img src="../../public/Icon-check.png" />
-            ) : (
-              <img src="../../public/Icon-close.png" />
-            )}
-            <img
-              src="../../public/Icon-wifi.png"
-              className="ml-4 sm-icons"
-            ></img>
+            {meta.wifi ? <img src={checkIcon} /> : <img src={checkIcon} />}
+            <img src={wifiIcon} alt="wifiIcon" className="ml-4 sm-icons"></img>
           </div>
         </div>
         <div className="flex justify-between">
@@ -109,7 +98,8 @@ function VenueCardDetail(props) {
           <div className="flex">
             <p>{maxGuests}</p>
             <img
-              src="../../public/Icon-person.png"
+              src={personIcon}
+              alt="personIcon"
               className="ml-6 sm-icons"
             ></img>
           </div>
@@ -119,11 +109,7 @@ function VenueCardDetail(props) {
         <p className="my-5 mx-14 stronger-text">Price: {price} NOK</p>
         <div className="flex m-5 mx-14">
           <p className="stronger-text">{rating}</p>
-          <img
-            src="../../public/Icon-star.png"
-            alt=""
-            className="ml-6 sm-icons "
-          />
+          <img src={starIcon} alt="starIcon" className="ml-6 sm-icons " />
         </div>
       </div>
       <hr />
