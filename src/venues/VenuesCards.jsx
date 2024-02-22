@@ -2,6 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
 import checkIcon from "../../public/Icon-check.png";
+import closIcon from "../../public/Icon-close.png";
+import breakfastIcon from "../../public/Icon-breakfast.png";
+import parkingIcon from "../../public/Icon-parking.png";
+import petsIcon from "../../public/Icon-pets.png";
+import wifiIcon from "../../public/Icon-wifi.png";
+import personIcon from "../../public/Icon-person.png";
+import starIcon from "../../public/Icon-star.png";
 
 function VenuesCards(props) {
   const {
@@ -43,74 +50,48 @@ function VenuesCards(props) {
                   {meta.breakfast ? (
                     <img src={checkIcon} />
                   ) : (
-                    <img src="../../public/Icon-close.png" />
+                    <img src={closIcon} />
                   )}
-                  <img
-                    src="../../public/Icon-breakfast.png"
-                    className="ml-4 sm-icons"
-                  ></img>
+                  <img src={breakfastIcon} className="ml-4 sm-icons"></img>
                 </div>
               </div>
               <div className="flex justify-between">
                 <p>Parking: </p>
                 <div className="flex">
                   {meta.parking ? (
-                    <img src="../../public/Icon-check.png" />
+                    <img src={checkIcon} />
                   ) : (
-                    <img src="../../public/Icon-close.png" />
+                    <img src={closIcon} />
                   )}
-                  <img
-                    src="../../public/Icon-parking.png"
-                    className="ml-4 sm-icons"
-                  ></img>
+                  <img src={parkingIcon} className="ml-4 sm-icons"></img>
                 </div>
               </div>
               <div className="flex justify-between">
                 <p>Pets: </p>
                 <div className="flex">
-                  {meta.pets ? (
-                    <img src="../../public/Icon-check.png" />
-                  ) : (
-                    <img src="../../public/Icon-close.png" />
-                  )}
-                  <img
-                    src="../../public/Icon-pets.png"
-                    className="ml-4 sm-icons"
-                  ></img>
+                  {meta.pets ? <img src={checkIcon} /> : <img src={closIcon} />}
+                  <img src={petsIcon} className="ml-4 sm-icons"></img>
                 </div>
               </div>
               <div className="flex justify-between">
                 <p>Wifi: </p>
                 <div className="flex">
-                  {meta.wifi ? (
-                    <img src="../../public/Icon-check.png" />
-                  ) : (
-                    <img src="../../public/Icon-close.png" />
-                  )}
-                  <img
-                    src="../../public/Icon-wifi.png"
-                    className="ml-4 sm-icons"
-                  ></img>
+                  {meta.wifi ? <img src={checkIcon} /> : <img src={closIcon} />}
+                  <img src={wifiIcon} className="ml-4 sm-icons"></img>
                 </div>
               </div>
               <div className="flex justify-between">
                 <p>Guests: </p>
                 <div className="flex">
                   <p>{maxGuests}</p>
-                  <img
-                    src="../../public/Icon-person.png"
-                    className="ml-6 sm-icons"
-                  ></img>
+                  <img src={personIcon} className="ml-6 sm-icons"></img>
                 </div>
               </div>
               <div className="flex justify-between">
                 <p>Rating: </p>
                 <div className="flex">
                   <p>{rating}</p>
-                  <img
-                    src="../../public/Icon-star.png"
-                    className="ml-6 sm-icons"
-                  ></img>
+                  <img src={starIcon} className="ml-6 sm-icons"></img>
                 </div>
               </div>
             </div>
