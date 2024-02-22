@@ -5,6 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import { isItLogged } from "./isItLogged";
+import { subDays, addDays, getDay } from "date-fns";
+
 // import BookingVenueConfirm from "./modal/bookingVenueConfirm";
 
 const url = BASE_URL + "/bookings";
@@ -28,7 +30,7 @@ function BookingForm(props) {
 
   //   let mnDate = [{}];
   //   let mxDate = "";
-  //   console.log(mnDate);
+  console.log(bookings);
 
   //   };
   //   const [startDate, setStartDate] = useState(new Date());
@@ -88,27 +90,47 @@ function BookingForm(props) {
   //     );
   //   }
 
-  //   let startBooking = [];
-  //   let endBooking = [];
-  //   let bookedStart = "";
-  //   let allBooking = [];
-  //   const bookedDates =
-  // bookings.map(function (book, index) {
-  // allBooking = book.dateTo + book.dateTo + index;
-  // bookedStart += book.dateFrom;
-  // bookedEnd += book.dateTo;
-  // startBooking.push(book.dateFrom);
-  // endBooking.push(book.dateTo);
-  // console.log(startBooking);
-  // console.log(endBooking);
-  // console.log("from: " + book.dateFrom + index);
-  // console.log("to: " + book.dateTo);
-  // console.log(book.dateTo + book.index);
-  //     if (book) return book.dateFrom;
+  let startBooking = [];
+  let endBooking = [];
+  let rangeBooking = [];
+
+  // const isWeekday = () => {
+  //   // const day = getDay(dates);
+  //   bookings.map((book) => {
+  //     startBooking = book.dateFrom;
+  //     endBooking = book.dateTo;
+
+  //     // console.log("start: " + startBooking);
+  //     // console.log("end: " + endBooking);
+  //   });
+  //   const beginning = startBooking;
+
+  //   // console.log(day);
+  //   return beginning;
+  // };
+  // console.log("start: " + startBooking);
+  // console.log("end: " + endBooking);
+
+  // let startBook = bookings.map((startBook) => {
+  //   // startBooking = book.dateFrom;
+  //   // endBooking = book.dateTo;
+  //   // rangeBooking += startBooking + endBooking;
+
+  //   console.log("start: " + startBooking);
+  //   console.log("end: " + endBooking);
+  //   return { date: startBook.dateFrom };
   // });
-  //   console.log("from: " + book.dateFrom);
-  //   return book.dateFrom;
-  //   console.log(allBooking);
+  // console.log(startBook);
+  // bookings.forEach((book) => (startBooking += book.dateFrom));
+
+  // bookings.forEach((book) => (endBooking += book.dateTo));
+
+  bookings.forEach(
+    (book) => (rangeBooking = { start: book.dateFrom, end: book.dateTo })
+  );
+
+  console.log("start: " + startBooking);
+  console.log("end: " + endBooking);
 
   function handleGuestQuantity(event) {
     const value = event.target.value;
@@ -116,7 +138,14 @@ function BookingForm(props) {
       setGuests(Number(value));
     }
   }
-  //   console.log("book" + allBooking);
+  console.log("book" + rangeBooking);
+
+  // let rangeBooking = "";
+
+  // bookings.forEach(
+  //   (book) => (rangeBooking += { start: book.dateFrom, end: book.dateTo })
+  // );
+  // console.log("range" + rangeBooking);
   return (
     <div>
       {/* {okResponse && (
@@ -126,16 +155,16 @@ function BookingForm(props) {
       )} */}
 
       <div>
-        {/* {" "}
-      <ul>
-        {bookings.map((book) => (
-          <li key={book.id}>
-            from: {book.dateFrom} to :{book.dateTo}
-            <br />
-            <hr />
-          </li>
-        ))}
-      </ul> */}
+        {" "}
+        {/* <ul>
+          {bookings.map((book) => (
+            <li key={book.id}>
+              from: {book.dateFrom} to :{book.dateTo}
+              <br />
+              <hr />
+            </li>
+          ))}
+        </ul> */}
         {okResponse && (
           <div>
             Response is Ok!
@@ -172,6 +201,9 @@ function BookingForm(props) {
               endDate={dateTo}
               selectsRange
               selectsDisabledDaysInRange
+              // excludeDates={[startBook]}
+              // filterDate={isWeekday}
+              excludeDateIntervals={[rangeBooking]}
               inline
               required
             />
