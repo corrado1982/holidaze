@@ -3,6 +3,15 @@ import * as storage from "../storage/index";
 import { BASE_URL } from "../constants/api";
 import { Link, json } from "react-router-dom";
 
+import checkIcon from "../../public/Icon-check.png";
+import closIcon from "../../public/Icon-close.png";
+import breakfastIcon from "../../public/Icon-breakfast.png";
+import parkingIcon from "../../public/Icon-parking.png";
+import petsIcon from "../../public/Icon-pets.png";
+import wifiIcon from "../../public/Icon-wifi.png";
+import personIcon from "../../public/Icon-person.png";
+import starIcon from "../../public/Icon-star.png";
+
 import viteLogo from "/vite.svg";
 const user = storage.load("username");
 const token = storage.load("token");
@@ -82,76 +91,58 @@ function MyVenuePage() {
                   <p>Brakfast: </p>
                   <div className="flex">
                     {product.meta.breakfast ? (
-                      <img src="../../public/Icon-check.png" />
+                      <img src={checkIcon} />
                     ) : (
-                      <img src="../../public/Icon-close.png" />
+                      <img src={closIcon} />
                     )}
-                    <img
-                      src="../../public/Icon-breakfast.png"
-                      className="ml-4 sm-icons"
-                    ></img>
+                    <img src={breakfastIcon} className="ml-4 sm-icons"></img>
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Parking: </p>
                   <div className="flex">
                     {product.meta.parking ? (
-                      <img src="../../public/Icon-check.png" />
+                      <img src={checkIcon} />
                     ) : (
-                      <img src="../../public/Icon-close.png" />
+                      <img src={closIcon} />
                     )}
-                    <img
-                      src="../../public/Icon-parking.png"
-                      className="ml-4 sm-icons"
-                    ></img>
+                    <img src={parkingIcon} className="ml-4 sm-icons"></img>
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Pets: </p>
                   <div className="flex">
                     {product.meta.pets ? (
-                      <img src="../../public/Icon-check.png" />
+                      <img src={checkIcon} />
                     ) : (
-                      <img src="../../public/Icon-close.png" />
+                      <img src={closIcon} />
                     )}
-                    <img
-                      src="../../public/Icon-pets.png"
-                      className="ml-4 sm-icons"
-                    ></img>
+                    <img src={petsIcon} className="ml-4 sm-icons"></img>
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Wifi: </p>
                   <div className="flex">
                     {product.meta.wifi ? (
-                      <img src="../../public/Icon-check.png" />
+                      <img src={checkIcon} />
                     ) : (
-                      <img src="../../public/Icon-close.png" />
+                      <img src={closIcon} />
                     )}
-                    <img
-                      src="../../public/Icon-wifi.png"
-                      className="ml-4 sm-icons"
-                    ></img>
+                    <img src={wifiIcon} className="ml-4 sm-icons"></img>
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Guests: </p>
                   <div className="flex">
                     <p>{product.maxGuests}</p>
-                    <img
-                      src="../../public/Icon-person.png"
-                      className="ml-6 sm-icons"
-                    ></img>
+                    <img src={personIcon} className="ml-6 sm-icons"></img>
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Rating: </p>
                   <div className="flex">
                     <p>{product.rating}</p>
-                    <img
-                      src="../../public/Icon-star.png"
-                      className="ml-6 sm-icons"
-                    ></img>
+                    <img src={starIcon} className="ml-6 sm-icons"></img>
                   </div>
                 </div>
               </div>
