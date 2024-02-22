@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
+import viteLogo from "/src/vite.svg";
+import { Link } from "react-router-dom";
 // import { removePost } from "../pages/MyBookingsPage";
 
 const token = storage.load("token");
 
 function MyBookings(props) {
-  // const { venue, dateFrom, dateTo, id } = props.post;
+  // const { venue, dateFrom, dateTo, id } = props.posts;
   const [bookings, setBookings] = useState(props.posts);
   // console.log(bookings.id);
   // console.log(props);
@@ -41,11 +43,20 @@ function MyBookings(props) {
           className="my-5 card-bg mx-auto flex justify-around"
           key={booking.id}
         >
-          <img
-            src={booking.venue.media[0]}
-            alt={booking.venue.name}
-            className=" h-24 w-24 object-fill rounded-lg m-2"
-          />
+          {booking.venue.media.length > 0 ? (
+            <img
+              src={booking.venue.media[0]}
+              alt={booking.venue.name}
+              className=" h-24 w-24 object-fill rounded-lg m-2"
+            />
+          ) : (
+            <img
+              src={viteLogo}
+              alt={booking.venue.name}
+              className=" h-24 w-24 object-fill rounded-lg m-2"
+            />
+          )}
+
           {/* <img
             src={venue.media[0]}
             alt={venue.name}
@@ -66,6 +77,7 @@ function MyBookings(props) {
               >
                 Delete
               </button>
+              {/* <Link to={"/venue/" + booking.id}>Look</Link> */}
             </div>
             <div>
               <p>{booking.venue.location.address}</p>

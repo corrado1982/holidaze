@@ -47,6 +47,15 @@ function VenueCardDetail(props) {
 ) : (
 <img src={viteLogo} />
 )} */}
+
+          {media.length < 1 && (
+            <img
+              className="h-48 w-48  object-fill ml-3  rounded-lg "
+              src={viteLogo}
+              alt="image of"
+            ></img>
+          )}
+
           {media.map((pic) => (
             <img key={pic} src={pic} alt="venue pic" className="h-48 m-2"></img>
           ))}
