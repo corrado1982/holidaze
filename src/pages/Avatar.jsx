@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import * as storage from "../storage/index.js";
 import { BASE_URL } from "../constants/api";
+import { useNavigate } from "react-router-dom";
 
 let avatar = storage.load("avatar");
 let userName = storage.load("username");
 const token = storage.load("token");
 
 export function Avatar() {
+  const navigate = useNavigate();
+
   const [avatarImg, setAvatarImg] = useState(avatar);
   const [newAvatar, setNewAvatar] = useState(null);
 
@@ -34,6 +37,7 @@ export function Avatar() {
 
     storage.save("avatar", data.avatar);
     setNewAvatar(storage.load("avatar"));
+    navigate(0);
     // let newAvatar = storage.load("avatar");
     // console.log(newAvatar);
 
@@ -49,7 +53,7 @@ export function Avatar() {
   // }, [upDateAvatar]);
   return (
     <div className=" bg-sky-100 rounded-lg shadow-xl m-auto size-4/5">
-      <img className="mx-auto my-5" src={newAvatar} />
+      <img className="mx-auto my-5" src={avatarImg} />
       <form className="flex flex-col" onSubmit={upDateAvatar}>
         <input
           className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
