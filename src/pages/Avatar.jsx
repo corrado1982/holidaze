@@ -11,7 +11,7 @@ export function Avatar() {
   const navigate = useNavigate();
 
   const [avatarImg, setAvatarImg] = useState(avatar);
-  const [newAvatar, setNewAvatar] = useState(null);
+  // const [newAvatar, setNewAvatar] = useState(null);
 
   function onAvatarChange(event) {
     setAvatarImg(event.target.value);
@@ -36,8 +36,8 @@ export function Avatar() {
     console.log(data);
 
     storage.save("avatar", data.avatar);
-    setNewAvatar(storage.load("avatar"));
-    navigate(0);
+    setAvatarImg(storage.load("avatar"));
+    // navigate(0);
     // let newAvatar = storage.load("avatar");
     // console.log(newAvatar);
 
@@ -48,7 +48,7 @@ export function Avatar() {
   // console.log(newAvatar);
   // useEffect(() => {
   //   let newAvatar = storage.load("avatar");
-  //   console.log(newAvatar);
+  // console.log(newAvatar);
   //   console.log("useffect works");
   // }, [upDateAvatar]);
   return (
