@@ -84,11 +84,12 @@ function LoggedNav() {
               tabIndex="-1"
               id="user-menu-item-0"
             >
-              <img
+              Avatar
+              {/* <img
                 className="h-8 w-8 rounded-full"
                 src={avatarPicture}
                 alt="my avatar"
-              ></img>
+              ></img> */}
             </NavLink>
           </li>
         </div>
