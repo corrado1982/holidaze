@@ -4,6 +4,7 @@ import { isManager } from "../../isItLogged";
 // import { logout } from "../../../auth/logout";
 import * as storage from "../../../storage/index";
 import logout from "../../../auth/logout";
+import holidazeLogo from "../../../../public/holidaze-logo.png";
 // import logout from "../../../auth/logout";
 
 const userName = storage.load("username");
@@ -32,7 +33,9 @@ function LoggedNav() {
     <nav className="flex">
       <ul className="relative ml-3 flex justify-between p-2 w-11/12 items-center">
         <li>
-          <NavLink to="/">Holidaze</NavLink>
+          <NavLink to="/">
+            <img src={holidazeLogo} alt="logo" className=" w-28" />
+          </NavLink>
         </li>
         {/* <div className="flex items-center"> */}
         {/* <p> */}
