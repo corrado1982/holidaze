@@ -3,11 +3,12 @@ import * as storage from "../storage/index.js";
 import { BASE_URL } from "../constants/api";
 // import { useNavigate } from "react-router-dom";
 
-let avatar = storage.load("avatar");
+// let avatar = storage.load("avatar");
 let userName = storage.load("username");
 const token = storage.load("token");
 
 export function Avatar() {
+  let avatar = storage.load("avatar");
   // const navigate = useNavigate();
 
   const [avatarImg, setAvatarImg] = useState(avatar);
@@ -37,7 +38,12 @@ export function Avatar() {
     console.log(data);
 
     storage.save("avatar", data.avatar);
+    // useEffect(() => {
+    // This is the callback that runs inside of the useEffect
+    // console.log("useEffect has run");
     setNewAvatar(storage.load("avatar"));
+    // }, [newAvatar]);
+
     // navigate("/");
   }
   return (
@@ -46,7 +52,7 @@ export function Avatar() {
       <form className="flex flex-col" onSubmit={upDateAvatar}>
         <input
           className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-          value={newAvatar}
+          defaultValue={newAvatar}
           placeholder="Avatar URL"
           onChange={onAvatarChange}
         />
