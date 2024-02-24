@@ -34,7 +34,7 @@ function LoggedNav() {
 
   console.log(showMenu);
   return (
-    <div>
+    <div className="fixed top-0 left-0 right-0">
       <nav className="flex">
         <ul className="relative ml-3 flex justify-between p-2 w-11/12 items-center">
           <li>
@@ -46,7 +46,8 @@ function LoggedNav() {
         <div className="flex items-center w-60 justify-evenly">
           <div>
             <button onClick={openModal} className="flex items-center">
-              {userName} <img className=" ml-1 w-8" src={menuIcon}></img>
+              <p className=" text-xl">{userName}</p>{" "}
+              <img className=" ml-1 w-8" src={menuIcon}></img>
             </button>
           </div>
           {/* <div className="flex items-center">

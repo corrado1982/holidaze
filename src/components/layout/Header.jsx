@@ -4,7 +4,7 @@ import LoggedNav from "./nav/LoggedNav";
 
 function Header() {
   return (
-    <header>
+    <header className=" mb-12">
       <div>{isItLogged() ? <LoggedNav /> : <UserNav />}</div>
     </header>
   );

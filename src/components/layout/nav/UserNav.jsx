@@ -4,7 +4,7 @@ import holidazeLogo from "../../../../public/holidaze-logo.png";
 
 function UserNav() {
   return (
-    <nav>
+    <nav className="fixed top-0 left-0 right-0">
       <ul className="relative ml-3 flex justify-between p-2 w-11/12 items-center">
         <li>
           <Link to="/">

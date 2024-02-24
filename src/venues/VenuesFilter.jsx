@@ -13,6 +13,8 @@ function VenuesFilter({ posts = [] }) {
   return (
     <div className="flex flex-col items-center">
       <input
+        className=" w-2/3 xl:w-1/3 h-10 rounded-lg"
+        placeholder="Search"
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value.trim())}
       ></input>
