@@ -127,69 +127,27 @@ function MyVenueDetailPage() {
     console.log(media);
     return (
       // NEW AS EXPERIMENT
-      <div>
-        <Link to={"/myvenue"}>my venues/...</Link>
-        <h1>Single Venue</h1>
+      <div className="bg-sky-50">
+        <Link className=" text-blue-800" to={"/myvenue"}>
+          my venues/...
+        </Link>
+        <h1 className="flex  justify-center py-4">{name}</h1>
         {/* <form onSubmit={onSubmit}> */}
-        <div className=" bg-sky-50 rounded-lg shadow-xl">
+        <div className="  rounded-lg shadow-xl">
           <div className="flex justify-around flex-wrap m-5"></div>
           <div className="flex items-center flex-col">
-            <h2>{name}</h2>
-
             <div className="flex flex-wrap m-2 items-center flex-col">
               {/* {media[0] ? ( */}
-              <div>
+              <div className="flex flex-wrap">
                 {posts.media.map((pic) => (
                   <div key={pic}>
                     <img src={pic} alt="venue pic" className="h-48 m-2"></img>
-                    {/* <div>
-                          <input
-                            type="url"
-                            defaultValue={media}
-                            onChange={onMediaChange}
-                          />
-                        </div> */}
-                    {/* <input
-                        type="url"
-                        defaultValue={pic}
-                        onChange={onMediaChange}
-                      /> */}
-                    {/* <button onClick={() => onButtonClick(10)}>Click</button> */}
                   </div>
                 ))}
-                {/* <div>
-                    <input
-                      type="url"
-                      defaultValue={media}
-                      onChange={onMediaChange}
-                    />
-                  </div> */}
               </div>
-              {/* ) : ( */}
-
-              {/* )} */}
-
-              {/* <input
-                  type="url"
-                  defaultValue="text"
-                  onChange={onMediaChange}
-                /> */}
             </div>
           </div>
-          <div>
-            {/* <button onClick={onDeleteMedia} className="btn-primary">
-                delete picture
-              </button> */}
-
-            {/* <input
-                type="url"
-                defaultValue={posts.media}
-                onChangeCapture={onMediaChange}
-              /> */}
-            {/* <button onClick={onMediaChange} className="btn-primary">
-                update picture
-              </button> */}
-          </div>
+          <div></div>
           {/* Icons */}
           <div className="flex flex-row justify-evenly m-3 flex-wrap">
             <div className="flex justify-between">
@@ -261,11 +219,27 @@ function MyVenueDetailPage() {
               <p>{description}</p>
             </div>
           </div>
+          <div className="flex justify-center">
+            <button onClick={() => removeVanue(id)}>
+              <Link to={"/myvenue"} className="btn-danger m-5">
+                Delete
+              </Link>
+            </button>
+            <Link
+              to={"/myvenue/modifymyvenue/" + id}
+              className="btn-primary m-5"
+            >
+              Modify page
+            </Link>
+          </div>
           <div>
-            <h2>Bokings:</h2>
-            <div className=" bg-sky-100 rounded-lg shadow-xl">
+            <h2 className="flex  justify-center py-4">Bokings:</h2>
+            <div>
               {bookings.map((book) => (
-                <div key={book.id}>
+                <div
+                  key={book.id}
+                  className=" bg-sky-100 rounded-lg shadow-xl m-5"
+                >
                   <p>From:{book.dateFrom}</p>
                   <p>To:{book.dateTo}</p>
                   <p>Creted:{book.created}</p>
@@ -274,18 +248,6 @@ function MyVenueDetailPage() {
               ))}
             </div>
           </div>
-          <button onClick={() => removeVanue(id)}>
-            <Link to={"/myvenue"} className="btn-primary">
-              Delete
-            </Link>
-          </button>
-          <Link to={"/myvenue/modifymyvenue/" + id} className="btn-primary">
-            modify page
-          </Link>
-          {/* <button className="btn-primary">Modify</button> */}
-          {/* <Link to={"/myvenue/modifymyvenue/" + id} className="btn-primary">
-              Modify
-            </Link> */}
         </div>
         {/* </form> */}
       </div>

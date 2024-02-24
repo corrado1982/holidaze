@@ -72,7 +72,7 @@ function CreateVenue() {
   });
 
   return (
-    <div className="my-5 card-bg size-1/2 m-auto">
+    <div className="my-5 card-bg size-5/6 lg:size-1/2 m-auto">
       <form className="py-5" onSubmit={handleSubmit(submitVenue)}>
         <h1 className="mx-auto flex justify-center my-10">Create a venue</h1>
         <div className="flex flex-col ">

@@ -141,11 +141,15 @@ function UpdateVenue() {
     return (
       <>
         <div>
-          <Link to={"/myvenue"}>my venues/</Link>
-          <Link to={"/myvenue/myvenuedetail/" + id}>Detail venue/...</Link>
+          <Link className=" text-blue-800" to={"/myvenue"}>
+            my venues/
+          </Link>
+          <Link className=" text-blue-800" to={"/myvenue/myvenuedetail/" + id}>
+            Detail venue/...
+          </Link>
         </div>
 
-        <div className="my-5 card-bg size-1/2 m-auto">
+        <div className="my-5 card-bg size-5/6 lg:size-1/2 m-auto">
           <form
             className="py-5"
             // provo come ha fatto cosa

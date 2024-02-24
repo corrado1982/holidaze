@@ -33,9 +33,9 @@ function VenueCardDetail(props) {
             className="h-20 w-20 rounded-full"
           />
         </div>
-        <div className=" stronger-text my-auto">
-          <p>{owner.name}</p>
-          <p>{owner.email}</p>
+        <div className=" text-sm  md:text-lg md:stronger-text stronger-text my-auto">
+          <p>Owner: {owner.name}</p>
+          <p>Email: {owner.email}</p>
         </div>
       </div>
       <div className="flex items-center flex-col">
@@ -114,7 +114,7 @@ function VenueCardDetail(props) {
           </div>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex flex-wrap justify-between">
         <p className="my-5 mx-14 stronger-text">Price: {price} NOK</p>
         <div className="flex m-5 mx-14">
           <p className="stronger-text">{rating}</p>

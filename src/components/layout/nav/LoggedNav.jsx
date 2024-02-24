@@ -56,7 +56,7 @@ function LoggedNav() {
         </div>
       </nav>
       {showMenu ? (
-        <ul className=" absolute right-0 max-w-48  bg-cyan-400">
+        <ul className=" absolute right-0 max-w-48  bg-white">
           <li className="flex">
             {/* AVATAR */}
             <NavLink

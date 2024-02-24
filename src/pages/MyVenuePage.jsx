@@ -63,13 +63,18 @@ function MyVenuePage() {
   console.log(posts);
   return (
     <div>
-      <h1>Venues page</h1>
-      <Link to={"/createvenue"} className="btn-primary m-auto my-10 flex">
-        New Venue
-      </Link>
+      <h1 className="flex  justify-center py-4">My Venues</h1>
+      <div className="flex">
+        <Link
+          className="btn-primary m-auto my-10 flex justify-center"
+          to={"/createvenue"}
+        >
+          New Venue
+        </Link>
+      </div>
       {posts.map((product) => (
         <div key={product.id}>
-          <div className=" bg-sky-50 rounded-lg shadow-xl">
+          <div className=" bg-sky-50 rounded-lg shadow-xl m-5">
             <h2 className=" p-3 place-items-start">{product.name}</h2>
             <div className="flex justify-between">
               <div>
@@ -166,14 +171,16 @@ function MyVenuePage() {
             >
               modify page
             </Link> */}
-            <Link
-              to={"myvenuedetail/" + product.id}
-              className="btn-primary"
-              key={product.id}
-              post={product}
-            >
-              Details
-            </Link>
+            <div className="   flex ">
+              <Link
+                className="btn-primary m-auto my-10 flex justify-center"
+                to={"myvenuedetail/" + product.id}
+                key={product.id}
+                post={product}
+              >
+                Details
+              </Link>
+            </div>
           </div>
         </div>
       ))}

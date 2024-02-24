@@ -166,8 +166,9 @@ function BookingForm(props) {
           ))}
         </ul> */}
         {okResponse && (
-          <div>
-            Response is Ok!
+          <div className="flex flex-col border-2 rounded-md border-green-600 bg-green-300 m-5">
+            <p className="  mx-auto my-10">Your booking is done!</p>
+
             <Link to="/mybookings" className=" btn-primary mx-auto my-10">
               GO to My Bookings
             </Link>

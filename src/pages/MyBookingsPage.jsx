@@ -83,12 +83,12 @@ function MyBookingsPage() {
   console.log(posts);
 
   return (
-    <>
-      <h1>My Bookings</h1>
-      <div className="bg-sky-50 rounded-lg shadow-xl size-4/5 m-auto">
+    <div className="bg-sky-100">
+      <h1 className="flex  justify-center py-4">My Bookings</h1>
+      <div className=" rounded-lg shadow-xl size-4/5 m-auto">
         <MyBookings key={posts.id} posts={posts} />
       </div>
-    </>
+    </div>
   );
 }
 
