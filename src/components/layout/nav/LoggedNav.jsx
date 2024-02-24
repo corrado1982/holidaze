@@ -5,6 +5,8 @@ import { isManager } from "../../isItLogged";
 import * as storage from "../../../storage/index";
 import logout from "../../../auth/logout";
 import holidazeLogo from "../../../../public/holidaze-logo.png";
+import menuIcon from "../../../../public/hb-menu-icon.png";
+
 const userName = storage.load("username");
 
 function LoggedNav() {
@@ -41,12 +43,15 @@ function LoggedNav() {
             </NavLink>
           </li>
         </ul>
-
-        <div>
-          <button onClick={openModal}>{userName}</button>
-        </div>
-        <div className="flex items-center">
-          <Link onClick={logout}>Log out</Link>
+        <div className="flex items-center w-60 justify-evenly">
+          <div>
+            <button onClick={openModal} className="flex items-center">
+              {userName} <img className=" ml-1 w-8" src={menuIcon}></img>
+            </button>
+          </div>
+          <div className="flex items-center">
+            <Link onClick={logout}>Log out</Link>
+          </div>
         </div>
       </nav>
       {showMenu ? (
