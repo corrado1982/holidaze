@@ -47,7 +47,7 @@ function VenuesList() {
   return (
     <div>
       <VenuesFilter posts={posts} />
-      <div className="mt-6 px-4 grid grid-cols-3 gap-x-12 gap-y-10">
+      <div className="mt-6 px-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3  gap-x-12 gap-y-10">
         {posts.map((post) => (
           <VenuesCards key={post.id} post={post} />
         ))}

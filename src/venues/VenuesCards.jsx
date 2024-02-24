@@ -32,18 +32,18 @@ function VenuesCards(props) {
             <div>
               {media.length > 0 ? (
                 <img
-                  className="h-48 w-48  object-fill ml-3  rounded-lg "
+                  className=" h-32  w-32 lg:h-48 lg:w-48   object-fill ml-3  rounded-lg "
                   src={media[0]}
                   alt="image of"
                 ></img>
               ) : (
                 <img
-                  className="h-48 w-48  object-fill ml-3  rounded-lg "
+                  className="h-32  w-32 lg:h-48 lg:w-48  object-fill ml-3  rounded-lg "
                   src={viteLogo}
                 />
               )}
             </div>
-            <div className="mr-3 w-40 flex flex-col justify-evenly">
+            <div className="mr-3 w-32 lg:w-40 flex flex-col justify-evenly">
               <div className="flex justify-between">
                 <p>Brakfast: </p>
                 <div className="flex">
