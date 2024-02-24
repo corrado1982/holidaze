@@ -49,9 +49,9 @@ function LoggedNav() {
               {userName} <img className=" ml-1 w-8" src={menuIcon}></img>
             </button>
           </div>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <Link onClick={logout}>Log out</Link>
-          </div>
+          </div> */}
         </div>
       </nav>
       {showMenu ? (
@@ -101,6 +101,9 @@ function LoggedNav() {
               </NavLink>
             </li>
           )}
+          <li className=" px-4">
+            <Link onClick={logout}>Log out</Link>
+          </li>
         </ul>
       ) : (
         <div></div>
