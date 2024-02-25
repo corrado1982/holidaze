@@ -40,8 +40,11 @@ function MyBookings(props) {
     <>
       <div>
         {bookings.map((booking) => (
-          <div className="my-5 card-bg mx-auto flex-col flex flex-wrap justify-around">
-            <div key={booking.id} className="flex  justify-around flex-wrap">
+          <div
+            key={booking.id}
+            className="my-5 card-bg mx-auto flex-col flex flex-wrap justify-around"
+          >
+            <div className="flex  justify-around flex-wrap">
               {booking.venue.media.length > 0 ? (
                 <img
                   src={booking.venue.media[0]}
