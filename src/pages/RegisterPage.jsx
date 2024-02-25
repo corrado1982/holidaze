@@ -25,7 +25,7 @@ const schema = yup
 
     password: yup
       .string()
-      .min(4, "Your password must be more then 4 character")
+      .min(8, "Your password must be more then 8 character")
       .max(100, "Your password must be 100 or lower")
       .required("Please enter a password"),
   })

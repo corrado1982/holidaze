@@ -20,5 +20,7 @@ export async function onRegister(data) {
   if (response.ok) {
     await onLogin(profile);
     console.log(profile);
+  } else {
+    alert(`Your name must not contain empty space " "`);
   }
 }

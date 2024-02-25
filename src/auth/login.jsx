@@ -26,5 +26,7 @@ export async function onLogin(data) {
     console.log(user);
     location.href = "/";
     return;
+  } else {
+    alert("You email is not registred or the password is wrong");
   }
 }
