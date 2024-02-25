@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer components {
-  nav {
+  nav,
+  footer {
     @apply bg-blue-800 text-white;
   }
   h1 {
