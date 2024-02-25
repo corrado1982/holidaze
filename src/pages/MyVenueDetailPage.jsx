@@ -220,11 +220,15 @@ function MyVenueDetailPage() {
             </div>
           </div>
           <div className="flex justify-center">
-            <button onClick={() => removeVanue(id)}>
-              <Link to={"/myvenue"} className="btn-danger m-5">
-                Delete
-              </Link>
-            </button>
+            {/* <button> */}
+            <Link
+              onClick={() => removeVanue(id)}
+              to={"/myvenue"}
+              className="btn-danger m-5"
+            >
+              Delete
+            </Link>
+            {/* </button> */}
             <Link
               to={"/myvenue/modifymyvenue/" + id}
               className="btn-primary m-5"
