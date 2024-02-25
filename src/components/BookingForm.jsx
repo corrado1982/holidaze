@@ -46,7 +46,6 @@ function BookingForm(props) {
   console.log(dateTo);
   console.log(guests);
   console.log(bookings);
-  //   console.log(bookings.dateFrom);
 
   async function onBookingSubmit(e) {
     e.preventDefault();

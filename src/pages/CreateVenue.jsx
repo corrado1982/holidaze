@@ -34,9 +34,15 @@ const schema = yup
       )
       .optional(),
 
-    price: yup.number().required("Please enter a price"),
+    price: yup
+      .number()
+      .min(1, "price start from 1")
+      .required("Please enter a price"),
 
-    maxGuests: yup.number().required("How many Guests?"),
+    maxGuests: yup
+      .number()
+      .min(1, "guests start from 1")
+      .required("How many Guests?"),
 
     rating: yup
       .number()
