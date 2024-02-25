@@ -12,13 +12,8 @@ import petsIcon from "../../public/Icon-pets.png";
 import wifiIcon from "../../public/Icon-wifi.png";
 import personIcon from "../../public/Icon-person.png";
 import starIcon from "../../public/Icon-star.png";
-// import { submitModifiedVenue } from "../auth/submitModifiedVenue";
 
 const token = storage.load("token");
-
-// function handleRemoveClick() {
-//   removeVanue();
-// }
 
 async function removeVanue(id) {
   const url = BASE_URL + "/venues/" + id;
@@ -40,10 +35,6 @@ function MyVenueDetailPage() {
   const [isError, setIsError] = useState(false);
   const [showPage, setShowPage] = useState(false);
 
-  // const [name, setName] = useState(posts.name);
-  // const [media, setMedia] = useState(posts.media);
-  // const [breakfast, setBreakfast] = useState();
-  // console.log(posts.media);
   useEffect(() => {
     async function getData() {
       try {
@@ -54,7 +45,7 @@ function MyVenueDetailPage() {
 
         const json = await response.json();
         setPosts(json);
-        // console.log(json);
+
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -67,38 +58,6 @@ function MyVenueDetailPage() {
     getData();
   }, []);
 
-  // async function onSubmit(event) {
-  //   event.preventDefault();
-  //   // let breakfast = posts.meta.breakfast;
-  //   // const media = posts.media;
-  //   const body = { name, media };
-  //   console.log(media);
-  //   console.log("data: " + body);
-  //   console.log("id : " + id);
-
-  //   const response = await fetch(BASE_URL + "/venues/" + id, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     method: "PUT",
-  //     body: JSON.stringify(body),
-  //   });
-
-  //   console.log(response);
-  // }
-  // function onNameChange(event) {
-  //   setName(event.target.value);
-  // }
-  // function onDeleteMedia() {
-  //   setMedia([]);
-  // }
-  // function onMediaChange(event) {
-  //   setMedia(event.target.value.split(",").map((pic) => pic.trim()));
-  // }
-  // function onBreackfastChange(event) {
-  //   setBreakfast(event.target.value);
-  // }
   if (isLoading) {
     return <div>Loading posts</div>;
   }
@@ -111,11 +70,9 @@ function MyVenueDetailPage() {
       id,
       name,
       description,
-
       media,
       meta,
       owner,
-
       location,
       maxGuests,
       bookings,
@@ -126,18 +83,16 @@ function MyVenueDetailPage() {
     console.log(posts);
     console.log(media);
     return (
-      // NEW AS EXPERIMENT
       <div className="bg-sky-50">
         <Link className=" text-blue-800" to={"/myvenue"}>
           my venues/...
         </Link>
         <h1 className="flex  justify-center py-4">{name}</h1>
-        {/* <form onSubmit={onSubmit}> */}
+
         <div className="  rounded-lg shadow-xl">
           <div className="flex justify-around flex-wrap m-5"></div>
           <div className="flex items-center flex-col">
             <div className="flex flex-wrap m-2 items-center flex-col">
-              {/* {media[0] ? ( */}
               <div className="flex flex-wrap">
                 {posts.media.map((pic) => (
                   <div key={pic}>
@@ -253,146 +208,7 @@ function MyVenueDetailPage() {
             </div>
           </div>
         </div>
-        {/* </form> */}
       </div>
-
-      // OLD TO KEEP
-
-      // <div>
-      //   <Link to={"/myvenue"}>Back</Link>
-      //   <h1>Single Venue</h1>
-      //   <div className=" bg-sky-50 rounded-lg shadow-xl">
-      //     <div className="flex justify-around flex-wrap m-5"></div>
-      //     <div className="flex items-center flex-col">
-      //       <h2>{name}</h2>
-
-      //       <div className="flex flex-wrap m-2">
-      //         {media.map((pic) => (
-      //           <img
-      //             key={pic}
-      //             src={pic}
-      //             alt="venue pic"
-      //             className="h-48 m-2"
-      //           ></img>
-      //         ))}
-      //       </div>
-      //     </div>
-      //     {/* Icons */}
-      //     <div className="flex flex-row justify-evenly m-3 flex-wrap">
-      //       <div className="flex justify-between">
-      //         <p>Brakfast: </p>
-      //         <div className="flex">
-      //           {meta.breakfast ? (
-      //             <img src="../../public/Icon-check.png" />
-      //           ) : (
-      //             <img src="../../public/Icon-close.png" />
-      //           )}
-      //           <img
-      //             src="../../public/Icon-breakfast.png"
-      //             className="ml-4 sm-icons"
-      //           ></img>
-      //         </div>
-      //       </div>
-      //       <div className="flex justify-between">
-      //         <p>Parking: </p>
-      //         <div className="flex">
-      //           {meta.parking ? (
-      //             <img src="../../public/Icon-check.png" />
-      //           ) : (
-      //             <img src="../../public/Icon-close.png" />
-      //           )}
-      //           <img
-      //             src="../../public/Icon-parking.png"
-      //             className="ml-4 sm-icons"
-      //           ></img>
-      //         </div>
-      //       </div>
-      //       <div className="flex justify-between">
-      //         <p>Pets: </p>
-      //         <div className="flex">
-      //           {meta.pets ? (
-      //             <img src="../../public/Icon-check.png" />
-      //           ) : (
-      //             <img src="../../public/Icon-close.png" />
-      //           )}
-      //           <img
-      //             src="../../public/Icon-pets.png"
-      //             className="ml-4 sm-icons"
-      //           ></img>
-      //         </div>
-      //       </div>
-      //       <div className="flex justify-between">
-      //         <p>Wifi: </p>
-      //         <div className="flex">
-      //           {meta.wifi ? (
-      //             <img src="../../public/Icon-check.png" />
-      //           ) : (
-      //             <img src="../../public/Icon-close.png" />
-      //           )}
-      //           <img
-      //             src="../../public/Icon-wifi.png"
-      //             className="ml-4 sm-icons"
-      //           ></img>
-      //         </div>
-      //       </div>
-      //       <div className="flex justify-between">
-      //         <p>Guests: </p>
-      //         <div className="flex">
-      //           <p>{maxGuests}</p>
-      //           <img
-      //             src="../../public/Icon-person.png"
-      //             className="ml-6 sm-icons"
-      //           ></img>
-      //         </div>
-      //       </div>
-      //     </div>
-      //     <div className="flex justify-between">
-      //       <p className="my-5 mx-14 stronger-text">Price: {price} NOK</p>
-      //       <div className="flex m-5 mx-14">
-      //         <p className="stronger-text">{rating}</p>
-      //         <img
-      //           src="../../public/Icon-star.png"
-      //           alt=""
-      //           className="ml-6 sm-icons "
-      //         />
-      //       </div>
-      //     </div>
-      //     <hr />
-      //     <div className="flex justify-between flex-wrap">
-      //       <div className="mx-14 my-5">
-      //         <p className="stronger-text">Location:</p>
-      //         <p>{location.address},</p>
-      //         <p> {location.city},</p>
-      //         <p> {location.country}</p>
-      //       </div>
-      //       <div className="w-80 mx-14 my-5">
-      //         <p className="stronger-text">About the place:</p>
-      //         <p>{description}</p>
-      //       </div>
-      //     </div>
-      //     <div>
-      //       <h2>Bokings:</h2>
-      //       <div className=" bg-sky-100 rounded-lg shadow-xl">
-      //         {bookings.map((book) => (
-      //           <div key={book.id}>
-      //             <p>From:{book.dateFrom}</p>
-      //             <p>To:{book.dateTo}</p>
-      //             <p>Creted:{book.created}</p>
-      //             <p>Guests:{book.guests}</p>
-      //           </div>
-      //         ))}
-      //       </div>
-      //     </div>
-      //     <button onClick={() => removeVanue(id)}>
-      //       <Link to={"/myvenue"} className="btn-primary">
-      //         Delete
-      //       </Link>
-      //     </button>
-      //     <Link to={"/myvenue/modifymyvenue/" + id} className="btn-primary">
-      //       Modify
-      //     </Link>
-      //   </div>
-      // </div>
     );
   }
 }

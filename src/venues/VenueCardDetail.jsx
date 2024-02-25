@@ -40,14 +40,8 @@ function VenueCardDetail(props) {
       </div>
       <div className="flex items-center flex-col">
         <h2>{name}</h2>
-        {/* <p className="mx-14">{description}</p> */}
-        <div className="flex flex-wrap m-2">
-          {/* {posts.media ? (
-<img src={posts.media} alt="image of"></img>
-) : (
-<img src={viteLogo} />
-)} */}
 
+        <div className="flex flex-wrap m-2">
           {media.length < 1 && (
             <img
               className="h-48 w-48  object-fill ml-3  rounded-lg "
@@ -59,9 +53,6 @@ function VenueCardDetail(props) {
           {media.map((pic) => (
             <img key={pic} src={pic} alt="venue pic" className="h-48 m-2"></img>
           ))}
-          {/* {owner.media.map((own) => (
-<p>{own.name}</p>
-))} */}
         </div>
       </div>
       {/* Icons */}

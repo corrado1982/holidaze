@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { submitVenue } from "../auth/submitVenue";
-import { Link } from "react-router-dom";
 
 const defaultMedia = "https://source.unsplash.com/1600x900";
 const schema = yup
@@ -63,8 +62,6 @@ const schema = yup
       zip: yup.string(),
       country: yup.string(),
       continent: yup.string(),
-      // lat: yup.number().min(-90).max(90),
-      // lng: yup.number().min(-180).max(180),
     }),
   })
   .required();

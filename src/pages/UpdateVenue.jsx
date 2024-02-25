@@ -55,19 +55,10 @@ const updateVenueSchema = yup
       zip: yup.string(),
       country: yup.string(),
       continent: yup.string(),
-      // lat: yup.number().min(-90).max(90),
-      // lng: yup.number().min(-180).max(180),
     }),
   })
   .required();
 
-// const onSubmitModifie = async (data) => {
-//   try {
-//     await submitModifiedVenue(data);
-//   } catch (error) {
-//     console.error("Error updating venue:", error);
-//   }
-// };
 function UpdateVenue() {
   let { id } = useParams();
   const {
@@ -98,7 +89,7 @@ function UpdateVenue() {
 
         const json = await response.json();
         setPosts(json);
-        // console.log(json);
+
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -119,9 +110,7 @@ function UpdateVenue() {
   }
   if (showPage) {
     const {
-      // s
       id,
-      // s
       name,
       description,
       media,
@@ -134,9 +123,6 @@ function UpdateVenue() {
       price,
     } = posts;
     console.log(posts);
-    // MyVenueDetailPage(posts);
-
-    // console.log(posts);
 
     return (
       <>
@@ -150,12 +136,7 @@ function UpdateVenue() {
         </div>
 
         <div className="my-5 card-bg size-5/6 lg:size-1/2 m-auto">
-          <form
-            className="py-5"
-            // provo come ha fatto cosa
-            onSubmit={handleSubmit(onSubmit)}
-            // onSubmit={handleSubmit(submitModifiedVenue(id))}
-          >
+          <form className="py-5" onSubmit={handleSubmit(onSubmit)}>
             <h1 className="mx-auto flex justify-center my-10">Modify venue</h1>
             <div className="flex flex-col ">
               <label className="m-auto" htmlFor="name">
@@ -166,7 +147,6 @@ function UpdateVenue() {
                 type="text"
                 defaultValue={name}
                 className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-                // value={posts.name}
               />
               <p>{errors.name?.message}</p>
             </div>
@@ -180,7 +160,6 @@ function UpdateVenue() {
                 type="text"
                 defaultValue={description}
                 className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-                // value={posts.description}
               />
               <p>{errors.description?.message}</p>
             </div>
@@ -194,7 +173,6 @@ function UpdateVenue() {
                 type="url"
                 defaultValue={media}
                 className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-                // value={posts.media}
               />
               <p>{errors.media?.message}</p>
             </div>
@@ -208,7 +186,6 @@ function UpdateVenue() {
                 type="number"
                 defaultValue={price}
                 className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-                // value={posts.price}
               />
               <p>{errors.price?.message}</p>
             </div>
@@ -222,7 +199,6 @@ function UpdateVenue() {
                 type="number"
                 defaultValue={maxGuests}
                 className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-                // placeholder={posts.maxGuests}
               />
               <p>{errors.maxGuests?.message}</p>
             </div>

@@ -2,8 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { BASE_URL } from "../constants/api";
-// import { REGISTER_URL } from "../constants/api";
+
 import { onRegister } from "../auth/register";
 
 const schema = yup
@@ -39,21 +38,6 @@ function RegisterPage() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  // async function onRegister(data) {
-  //   event.preventDefault();
-  //   console.log(data);
-  //   const response = await fetch(BASE_URL + REGISTER_URL, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //   });
-  //   console.log(response);
-  //   console.log(data.password);
-  //   console.log(data.email);
-  // }
 
   return (
     <div className="my-5 card-bg size-1/2 m-auto">

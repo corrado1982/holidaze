@@ -9,6 +9,5 @@ function Header() {
     </header>
   );
 }
-// console.log(isItLogged());
 
 export default Header;

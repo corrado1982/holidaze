@@ -3,7 +3,6 @@ import { LOGIN_URL } from "../constants/api";
 import * as storage from "../storage/index.js";
 
 export async function onLogin(data) {
-  //   event.preventDefault();
   console.log(data);
   const response = await fetch(BASE_URL + LOGIN_URL, {
     headers: {

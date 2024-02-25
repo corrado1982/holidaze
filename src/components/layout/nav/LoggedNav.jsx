@@ -19,13 +19,8 @@ function LoggedNav() {
       setShowMenu(false);
     }
   }
-  // const myBody = window != this;
-  // HANDLE CLICK OUT
-  // if (showMenu === true) {
-  //   window.addEventListener("click", handleClickOut, true);
-  // }
+
   function handleClickOut() {
-    // event.preventDefault();
     if (showMenu === true) {
       setShowMenu(false);
     }

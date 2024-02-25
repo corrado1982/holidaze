@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import * as storage from "../storage/index.js";
 import { BASE_URL } from "../constants/api";
-// import { useNavigate } from "react-router-dom";
 
-// let avatar = storage.load("avatar");
 let userName = storage.load("username");
 const token = storage.load("token");
 
 export function Avatar() {
   let avatar = storage.load("avatar");
-  // const navigate = useNavigate();
 
   const [avatarImg, setAvatarImg] = useState(avatar);
   const [newAvatar, setNewAvatar] = useState(avatarImg);
@@ -17,7 +14,6 @@ export function Avatar() {
   function onAvatarChange(event) {
     event.preventDefault();
     setAvatarImg(event.target.value);
-    // avatar = storage.load("avatar");
   }
 
   async function upDateAvatar() {
@@ -38,13 +34,8 @@ export function Avatar() {
     console.log(data);
 
     storage.save("avatar", data.avatar);
-    // useEffect(() => {
-    // This is the callback that runs inside of the useEffect
-    // console.log("useEffect has run");
-    setNewAvatar(storage.load("avatar"));
-    // }, [newAvatar]);
 
-    // navigate("/");
+    setNewAvatar(storage.load("avatar"));
   }
   return (
     <div className=" bg-sky-100 rounded-lg shadow-xl m-auto size-4/5">
