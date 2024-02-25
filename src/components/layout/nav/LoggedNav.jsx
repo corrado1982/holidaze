@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { isManager } from "../../isItLogged";
-// import { logout } from "../../../auth/logout";
 import * as storage from "../../../storage/index";
 import logout from "../../../auth/logout";
 import holidazeLogo from "../../../../public/holidaze-logo.png";
@@ -20,16 +19,17 @@ function LoggedNav() {
       setShowMenu(false);
     }
   }
-
+  // const myBody = window != this;
   // HANDLE CLICK OUT
   // if (showMenu === true) {
-  //   document.addEventListener("click", handleClickOut, true);
+  //   window.addEventListener("click", handleClickOut, true);
   // }
-  // function handleClickOut() {
-  //   if (showMenu === true) {
-  //     setShowMenu(false);
-  //   }
-  // }
+  function handleClickOut() {
+    // event.preventDefault();
+    if (showMenu === true) {
+      setShowMenu(false);
+    }
+  }
 
   console.log(showMenu);
   return (
@@ -37,7 +37,7 @@ function LoggedNav() {
       <nav className="flex">
         <ul className="relative ml-3 flex justify-between p-2 w-11/12 items-center">
           <li>
-            <NavLink to="/">
+            <NavLink onClick={handleClickOut} to="/">
               <img src={holidazeLogo} alt="logo" className=" w-28" />
             </NavLink>
           </li>
@@ -49,16 +49,14 @@ function LoggedNav() {
               <img className=" ml-1 w-8" src={menuIcon}></img>
             </button>
           </div>
-          {/* <div className="flex items-center">
-            <Link onClick={logout}>Log out</Link>
-          </div> */}
         </div>
       </nav>
       {showMenu ? (
-        <ul className=" absolute right-0 max-w-48  bg-white">
+        <ul className=" absolute right-0 max-w-48  bg-sky-100">
           <li className="flex">
             {/* AVATAR */}
             <NavLink
+              onClick={handleClickOut}
               to="/avatar"
               className="block px-4 py-2 "
               role="menuitem"
@@ -66,17 +64,13 @@ function LoggedNav() {
               id="user-menu-item-0"
             >
               Avatar
-              {/* <img
-                className="h-8 w-8 rounded-full"
-                src={avatarPicture}
-                alt="my avatar"
-              ></img> */}
             </NavLink>
           </li>
 
           {/* MY BOOKINGS */}
           <li>
             <NavLink
+              onClick={handleClickOut}
               to="/mybookings"
               className="block px-4 py-2 "
               role="menuitem"
@@ -91,6 +85,7 @@ function LoggedNav() {
           {isManager() && (
             <li>
               <NavLink
+                onClick={handleClickOut}
                 className="block px-4 py-2 "
                 role="menuitem"
                 tabIndex="-1"
