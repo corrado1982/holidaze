@@ -22,14 +22,13 @@ function LoggedNav() {
   }
 
   // HANDLE CLICK OUT
-
+  // if (showMenu === true) {
+  //   document.addEventListener("click", handleClickOut, true);
+  // }
   // function handleClickOut() {
   //   if (showMenu === true) {
   //     setShowMenu(false);
   //   }
-  // }
-  // if (showMenu === true) {
-  //   document.addEventListener("click", handleClickOut, true);
   // }
 
   console.log(showMenu);
