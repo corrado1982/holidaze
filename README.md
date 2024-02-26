@@ -62,3 +62,7 @@ npm run build
 
 Email: corrado.rofi@gmail.com
 
+## Link to Netlify
+
+https://holidazemain.netlify.app/
+
