@@ -53,7 +53,7 @@ function MyBookingsPage() {
   console.log(posts);
 
   return (
-    <div className="bg-sky-100">
+    <div className="bg-sky-100 min-h-dvh">
       <h1 className="flex  justify-center py-4">My Bookings</h1>
       <div className=" rounded-lg shadow-xl size-4/5 m-auto">
         <MyBookings key={posts.id} posts={posts} />

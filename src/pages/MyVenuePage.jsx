@@ -62,7 +62,7 @@ function MyVenuePage() {
   }
   console.log(posts);
   return (
-    <div>
+    <div className="min-h-dvh">
       <h1 className="flex  justify-center py-4">My Venues</h1>
       <div className="flex">
         <Link

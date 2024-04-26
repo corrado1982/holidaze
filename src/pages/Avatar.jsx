@@ -38,7 +38,7 @@ export function Avatar() {
     setNewAvatar(storage.load("avatar"));
   }
   return (
-    <div className=" bg-sky-100 rounded-lg shadow-xl m-auto size-4/5">
+    <div className=" bg-sky-100 rounded-lg shadow-xl m-auto size-4/5 min-h-dvh">
       <img className="mx-auto my-5" src={newAvatar} />
       <form className="flex flex-col" onSubmit={upDateAvatar}>
         <input
