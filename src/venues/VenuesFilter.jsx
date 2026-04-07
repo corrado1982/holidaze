@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 function VenuesFilter({ posts = [] }) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filterProducts = posts.filter((post) =>
-    post.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
-  );
+  // const filterProducts = posts.filter((post) =>
+  //   post.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+  // );
+  const filterProducts = Array.isArray(posts)
+    ? posts.filter((post) =>
+        post.name.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
+    : [];
   console.log("filter", filterProducts);
 
   console.log("tape: ", searchTerm);

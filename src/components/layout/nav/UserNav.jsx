@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import holidazeLogo from "../../../../public/holidaze-logo.png";
+// import holidazeLogo from "../../../../public/holidaze-logo.png";
+import holidazeLogo from "../../../assets/holidaze-logo.png";
 
 function UserNav() {
   return (

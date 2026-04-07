@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import viteLogo from "/src/vite.svg";
-import checkIcon from "../../public/Icon-check.png";
-import closIcon from "../../public/Icon-close.png";
-import breakfastIcon from "../../public/Icon-breakfast.png";
-import parkingIcon from "../../public/Icon-parking.png";
-import petsIcon from "../../public/Icon-pets.png";
-import wifiIcon from "../../public/Icon-wifi.png";
-import personIcon from "../../public/Icon-person.png";
-import starIcon from "../../public/Icon-star.png";
+// import checkIcon from "../../public/Icon-check.png";
+import checkIcon from "../assets/Icon-check.png";
+import closIcon from "../assets/Icon-close.png";
+import breakfastIcon from "../assets/Icon-breakfast.png";
+import parkingIcon from "../assets/Icon-parking.png";
+import petsIcon from "../assets/Icon-pets.png";
+import wifiIcon from "../assets/Icon-wifi.png";
+import personIcon from "../assets/Icon-person.png";
+import starIcon from "../assets/Icon-star.png";
 
 function VenuesCards(props) {
   const {

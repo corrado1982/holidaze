@@ -23,7 +23,7 @@ function VenuesList() {
         const response = await fetch(url);
         // + "?_owner=true&_bookings=true"
         const json = await response.json();
-        setPosts(json);
+        setPosts(json.data);
 
         setIsLoading(false);
       } catch (error) {
@@ -44,13 +44,23 @@ function VenuesList() {
   }
   console.log(posts);
 
+  // return (
+  //   <div>
+  //     <VenuesFilter posts={posts} />
+  //     <div className="mt-6 px-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3  gap-x-12 gap-y-10">
+  //       {posts.map((post) => (
+  //         <VenuesCards key={post.id} post={post} />
+  //       ))}
+  //     </div>
+  //   </div>
+  // );
   return (
     <div>
       <VenuesFilter posts={posts} />
-      <div className="mt-6 px-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3  gap-x-12 gap-y-10">
-        {posts.map((post) => (
-          <VenuesCards key={post.id} post={post} />
-        ))}
+      <div className="mt-6 px-4 grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-x-12 gap-y-10">
+        {/* Aggiungiamo il controllo: "se posts esiste ed è un array, allora fai il map" */}
+        {Array.isArray(posts) &&
+          posts.map((post) => <VenuesCards key={post.id} post={post} />)}
       </div>
     </div>
   );

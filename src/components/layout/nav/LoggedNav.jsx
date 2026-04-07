@@ -3,8 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import { isManager } from "../../isItLogged";
 import * as storage from "../../../storage/index";
 import logout from "../../../auth/logout";
-import holidazeLogo from "../../../../public/holidaze-logo.png";
-import menuIcon from "../../../../public/hb-menu-icon.png";
+// import holidazeLogo from "../../../../public/holidaze-logo.png";
+import holidazeLogo from "../../../assets/holidaze-logo.png";
+import menuIcon from "../../../assets/hb-menu-icon.png";
 
 const userName = storage.load("username");
 

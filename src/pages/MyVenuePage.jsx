@@ -3,16 +3,17 @@ import * as storage from "../storage/index";
 import { BASE_URL } from "../constants/api";
 import { Link, json } from "react-router-dom";
 
-import checkIcon from "../../public/Icon-check.png";
-import closIcon from "../../public/Icon-close.png";
-import breakfastIcon from "../../public/Icon-breakfast.png";
-import parkingIcon from "../../public/Icon-parking.png";
-import petsIcon from "../../public/Icon-pets.png";
-import wifiIcon from "../../public/Icon-wifi.png";
-import personIcon from "../../public/Icon-person.png";
-import starIcon from "../../public/Icon-star.png";
+// import checkIcon from "../../public/Icon-check.png";
+import checkIcon from "../assets/Icon-check.png";
+import closIcon from "../assets/Icon-close.png";
+import breakfastIcon from "../assets/Icon-breakfast.png";
+import parkingIcon from "../assets/Icon-parking.png";
+import petsIcon from "../assets/Icon-pets.png";
+import wifiIcon from "../assets/Icon-wifi.png";
+import personIcon from "../assets/Icon-person.png";
+import starIcon from "../assets/Icon-star.png";
 
-import viteLogo from "/vite.svg";
+import viteLogo from "../assets/vite.svg";
 const user = storage.load("username");
 const token = storage.load("token");
 const url = BASE_URL + "/profiles/" + user + "/venues";
