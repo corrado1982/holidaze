@@ -3,7 +3,6 @@ import { LOGIN_URL } from "../constants/api";
 import * as storage from "../storage/index.js";
 
 export async function onLogin(data) {
-  console.log(data);
   const response = await fetch(BASE_URL + LOGIN_URL, {
     headers: {
       "Content-Type": "application/json",
@@ -12,20 +11,21 @@ export async function onLogin(data) {
     body: JSON.stringify(data),
   });
 
-  console.log(response);
+  const json = await response.json(); // Recuperiamo tutto l'oggetto
 
   if (response.ok) {
-    const { accessToken, ...user } = await response.json();
+    // NELLA V2: i dati sono dentro json.data
+    const { accessToken, ...user } = json.data;
+
     storage.save("token", accessToken);
     storage.save("profile", user);
-    storage.save("avatar", user.avatar);
+    // Nota: user.avatar nella v2 è un oggetto { url, alt }
+    storage.save("avatar", user.avatar?.url);
     storage.save("manager", user.venueManager);
     storage.save("username", user.name);
 
-    console.log(user);
     location.href = "/";
-    return;
   } else {
-    alert("You email is not registred or the password is wrong");
+    alert("Email non registrata o password errata");
   }
 }
