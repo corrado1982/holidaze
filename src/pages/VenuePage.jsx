@@ -27,7 +27,7 @@ function VenuePage() {
         const response = await fetch(urlVenue);
         const json = await response.json();
 
-        setPosts(json);
+        setPosts(json.data);
 
         setIsLoading(false);
       } catch (error) {

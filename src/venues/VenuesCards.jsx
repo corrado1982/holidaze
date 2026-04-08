@@ -34,8 +34,8 @@ function VenuesCards(props) {
               {media.length > 0 ? (
                 <img
                   className=" h-32  w-32 lg:h-48 lg:w-48   object-fill ml-3  rounded-lg "
-                  src={media[0]}
-                  alt="image of"
+                  src={media?.[0]?.url || "fallback-image-url-qui"}
+                  alt={media?.[0]?.alt || name}
                 ></img>
               ) : (
                 <img

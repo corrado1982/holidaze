@@ -57,8 +57,8 @@ function BookingForm(props) {
 
   let rangeBooking = [];
 
-  bookings.forEach(
-    (book) => (rangeBooking = { start: book.dateFrom, end: book.dateTo })
+  bookings?.forEach(
+    (book) => (rangeBooking = { start: book.dateFrom, end: book.dateTo }),
   );
 
   function handleGuestQuantity(event) {
