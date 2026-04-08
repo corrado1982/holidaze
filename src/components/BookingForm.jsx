@@ -1,123 +1,121 @@
 import React, { useState } from "react";
-import { Link, json, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BASE_URL } from "../constants/api";
 import * as storage from "../storage/index";
 import { isItLogged } from "./isItLogged";
 
-const url = BASE_URL + "/bookings";
+// 1. URL CORRETTO PER V2 (con /holidaze)
+const url = BASE_URL + "/holidaze/bookings";
 
 function BookingForm(props) {
   const { maxGuests, id, bookings } = props.guestinfo;
   const [dateFrom, setDateFrom] = useState(new Date());
   const [dateTo, setDateTo] = useState(null);
-  const [guests, setGuests] = useState(0);
+  const [guests, setGuests] = useState(1); // Inizializza a 1, non 0
   const [okResponse, setOkResponse] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  console.log(bookings);
+  const token = storage.load("token");
+  const apiKey = "e0de0b9e-bddb-4b0c-8302-55da4d4d4489"; // <--- METTI QUI LA TUA API KEY
 
   const onChange = (dates) => {
     const [start, end] = dates;
     setDateFrom(start);
     setDateTo(end);
   };
-  const token = storage.load("token");
-  const venueId = id;
-  console.log(dateFrom);
-  console.log(dateTo);
-  console.log(guests);
-  console.log(bookings);
 
   async function onBookingSubmit(e) {
     e.preventDefault();
+    setErrorMessage("");
+
+    // 2. FORMATO DATI PER V2 (ISO String)
     const data = {
-      guests,
-      dateFrom,
-      dateTo,
-      venueId,
+      guests: guests,
+      dateFrom: dateFrom.toISOString(),
+      dateTo: dateTo ? dateTo.toISOString() : null,
+      venueId: id,
     };
 
-    console.log(id);
-    const response = await fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      method: "POST",
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": apiKey, // <--- OBBLIGATORIO NELLA V2
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      });
 
-    console.log(response);
-    {
-      response.ok && setOkResponse(true);
+      const result = await response.json();
+
+      if (response.ok) {
+        setOkResponse(true);
+      } else {
+        setErrorMessage(result.errors?.[0]?.message || "Booking failed");
+      }
+    } catch (error) {
+      setErrorMessage("Network error, try again.");
     }
   }
-  console.log(okResponse);
 
-  let rangeBooking = [];
-
-  bookings?.forEach(
-    (book) => (rangeBooking = { start: book.dateFrom, end: book.dateTo }),
-  );
-
-  function handleGuestQuantity(event) {
-    const value = event.target.value;
-    if (event.target.name === "quantity") {
-      setGuests(Number(value));
-    }
-  }
-  console.log("book" + rangeBooking);
+  // 3. LOGICA CALENDARIO (Array di intervalli occupati)
+  const rangeBooking =
+    bookings?.map((book) => ({
+      start: new Date(book.dateFrom),
+      end: new Date(book.dateTo),
+    })) || [];
 
   return (
     <div>
-      <div>
-        {" "}
-        {okResponse && (
-          <div className="flex flex-col border-2 rounded-md border-green-600 bg-green-300 m-5">
-            <p className="  mx-auto my-10">Your booking is done!</p>
+      {okResponse && (
+        <div className="flex flex-col border-2 rounded-md border-green-600 bg-green-300 m-5">
+          <p className="mx-auto my-10">Your booking is done!</p>
+          <Link to="/mybookings" className="btn-primary mx-auto my-10">
+            GO to My Bookings
+          </Link>
+        </div>
+      )}
 
-            <Link to="/mybookings" className=" btn-primary mx-auto my-10">
-              GO to My Bookings
-            </Link>
-          </div>
-        )}
-        {isItLogged() ? (
-          <form
-            className="flex flex-col items-center"
-            onSubmit={onBookingSubmit}
-          >
-            <label htmlFor="quantity">
-              Guests: (between 1 and {maxGuests}):
-            </label>
-            <input
-              className="my-5"
-              type="number"
-              name="quantity"
-              min="1"
-              max={maxGuests}
-              onChange={handleGuestQuantity}
-              required
-            ></input>
+      {errorMessage && (
+        <p className="text-red-600 text-center">{errorMessage}</p>
+      )}
 
-            <DatePicker
-              selected={dateFrom}
-              onChange={onChange}
-              startDate={dateFrom}
-              endDate={dateTo}
-              selectsRange
-              selectsDisabledDaysInRange
-              excludeDateIntervals={[rangeBooking]}
-              inline
-              required
-            />
-            <button className=" btn-primary mx-auto my-10">Book it</button>
-          </form>
-        ) : (
-          <div></div>
-        )}
-      </div>
+      {isItLogged() ? (
+        <form className="flex flex-col items-center" onSubmit={onBookingSubmit}>
+          <label htmlFor="quantity">Guests (1 to {maxGuests}):</label>
+          <input
+            className="my-5 border p-2"
+            type="number"
+            name="quantity"
+            min="1"
+            max={maxGuests}
+            value={guests}
+            onChange={(e) => setGuests(Number(e.target.value))}
+            required
+          />
+
+          <DatePicker
+            selected={dateFrom}
+            onChange={onChange}
+            startDate={dateFrom}
+            endDate={dateTo}
+            selectsRange
+            excludeDateIntervals={rangeBooking} // <--- Mostra date occupate
+            inline
+            required
+          />
+          <button type="submit" className="btn-primary mx-auto my-10">
+            Book it
+          </button>
+        </form>
+      ) : (
+        <p className="text-center p-5">Please login to book.</p>
+      )}
     </div>
   );
 }
+
 export default BookingForm;

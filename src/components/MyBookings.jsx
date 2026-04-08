@@ -1,83 +1,98 @@
-import React, { useState } from "react";
-import { BASE_URL } from "../constants/api";
+import React, { useState, useEffect } from "react";
+import { BASE_URL, API_KEY } from "../constants/api";
 import * as storage from "../storage/index";
 import viteLogo from "/src/vite.svg";
-import { Link } from "react-router-dom";
-
-const token = storage.load("token");
 
 function MyBookings(props) {
-  const [bookings, setBookings] = useState(props.posts);
+  // Inizializziamo lo stato con i posts ricevuti dalle props
+  const [bookings, setBookings] = useState(props.posts || []);
+  const token = storage.load("token");
+
+  // Aggiorna lo stato se le props cambiano (es. dopo il caricamento asincrono)
+  useEffect(() => {
+    setBookings(props.posts);
+  }, [props.posts]);
 
   async function removePost(id) {
-    const urlRemove = BASE_URL + "/bookings/" + id;
-    const response = await fetch(urlRemove, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      method: "DELETE",
-    });
+    if (!window.confirm("Are you sure you want to delete this booking?"))
+      return;
 
-    console.log(response);
-    const oldBookings = [...bookings];
-    const updatedBookings = oldBookings.filter((booking) => booking.id !== id);
-    console.log(updatedBookings);
-    setBookings(updatedBookings);
+    // URL corretto per v2: /holidaze/bookings/ID
+    const urlRemove = `${BASE_URL}/holidaze/bookings/${id}`;
+
+    try {
+      const response = await fetch(urlRemove, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": API_KEY, // Obbligatorio nella v2
+        },
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        // Rimuoviamo il booking dallo stato locale senza ricaricare la pagina
+        const updatedBookings = bookings.filter((booking) => booking.id !== id);
+        setBookings(updatedBookings);
+        alert("Booking deleted successfully");
+      } else {
+        alert("Failed to delete booking.");
+      }
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+    }
   }
-  console.log(bookings);
-  console.log(props.post);
-  return (
-    <>
-      <div>
-        {bookings.map((booking) => (
-          <div
-            key={booking.id}
-            className="my-5 card-bg mx-auto flex-col flex flex-wrap justify-around"
-          >
-            <div className="flex  justify-around flex-wrap">
-              {booking.venue.media.length > 0 ? (
-                <img
-                  src={booking.venue.media[0]}
-                  alt={booking.venue.name}
-                  className=" h-24 w-24 object-fill rounded-lg m-2"
-                />
-              ) : (
-                <img
-                  src={viteLogo}
-                  alt={booking.venue.name}
-                  className=" h-24 w-24 object-fill rounded-lg m-2"
-                />
-              )}
 
-              <div className="flex flex-wrap">
-                <div className="flex  flex-col justify-between">
-                  <div>
-                    <h2 className=" w-80">{booking.venue.name}</h2>
-                  </div>
-                  <div className="mb-2">
-                    <p>from: {booking.dateFrom}</p>
-                    <p>to: {booking.dateTo}</p>
-                  </div>
-                </div>
+  return (
+    <div>
+      {bookings?.map((booking) => (
+        <div
+          key={booking.id}
+          className="my-5 card-bg mx-auto flex-col flex flex-wrap justify-around p-4 border rounded"
+        >
+          <div className="flex justify-around flex-wrap">
+            {/* Controllo immagine per v2: media è un array di oggetti {url, alt} */}
+            {booking.venue?.media?.length > 0 ? (
+              <img
+                src={booking.venue.media[0].url}
+                alt={booking.venue.media[0].alt || booking.venue.name}
+                className="h-24 w-24 object-cover rounded-lg m-2"
+              />
+            ) : (
+              <img
+                src={viteLogo}
+                alt="placeholder"
+                className="h-24 w-24 object-cover rounded-lg m-2"
+              />
+            )}
+
+            <div className="flex flex-wrap flex-1 ml-4">
+              <div className="flex flex-col justify-between">
                 <div>
-                  <p>{booking.venue.location.address}</p>
-                  <p>{booking.venue.location.zip}</p>
-                  <p>{booking.venue.location.city}</p>
-                  <p>{booking.venue.location.country}</p>
+                  <h2 className="text-xl font-bold">{booking.venue?.name}</h2>
+                </div>
+                <div className="mb-2 text-sm">
+                  <p>From: {new Date(booking.dateFrom).toLocaleDateString()}</p>
+                  <p>To: {new Date(booking.dateTo).toLocaleDateString()}</p>
                 </div>
               </div>
+              <div className="ml-auto text-sm text-gray-600">
+                <p>{booking.venue?.location?.address}</p>
+                <p>{booking.venue?.location?.city}</p>
+                <p>{booking.venue?.location?.country}</p>
+              </div>
             </div>
-            <button
-              onClick={() => removePost(booking.id)}
-              className="btn-danger m-auto my-3"
-            >
-              Delete
-            </button>
           </div>
-        ))}
-      </div>
-    </>
+          <button
+            onClick={() => removePost(booking.id)}
+            className="bg-red-500 text-white px-4 py-2 rounded m-auto my-3 hover:bg-red-700"
+          >
+            Delete Booking
+          </button>
+        </div>
+      ))}
+    </div>
   );
 }
+
 export default MyBookings;
