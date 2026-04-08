@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as storage from "../storage/index";
-import { BASE_URL } from "../constants/api";
-import { Link, json } from "react-router-dom";
+import { BASE_URL, API_KEY } from "../constants/api"; // Assicurati che API_KEY sia nelle costanti
+import { Link } from "react-router-dom";
 
-// import checkIcon from "../../public/Icon-check.png";
 import checkIcon from "../assets/Icon-check.png";
 import closIcon from "../assets/Icon-close.png";
 import breakfastIcon from "../assets/Icon-breakfast.png";
@@ -12,37 +11,42 @@ import petsIcon from "../assets/Icon-pets.png";
 import wifiIcon from "../assets/Icon-wifi.png";
 import personIcon from "../assets/Icon-person.png";
 import starIcon from "../assets/Icon-star.png";
-
 import viteLogo from "../assets/vite.svg";
-const user = storage.load("username");
-const token = storage.load("token");
-const url = BASE_URL + "/profiles/" + user + "/venues";
-
-console.log(user);
 
 function MyVenuePage() {
   const [posts, setPosts] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
-
   const [isError, setIsError] = useState(false);
+
+  const user = storage.load("username");
+  const token = storage.load("token");
+
+  // URL corretto per v2: aggiungiamo /holidaze
+  const url = `${BASE_URL}/holidaze/profiles/${user}/venues`;
 
   useEffect(() => {
     async function getData() {
       try {
         setIsError(false);
-
         setIsLoading(true);
+
         const response = await fetch(url, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            "X-Noroff-API-Key": API_KEY, // Obbligatorio nella v2
           },
           method: "GET",
         });
-        console.log(response);
+
         const json = await response.json();
-        setPosts(json);
+
+        if (response.ok) {
+          // Nella v2 i dati sono in json.data
+          setPosts(json.data || []);
+        } else {
+          setIsError(true);
+        }
 
         setIsLoading(false);
       } catch (error) {
@@ -51,135 +55,157 @@ function MyVenuePage() {
       }
     }
 
-    getData();
-  }, []);
+    if (user && token) {
+      getData();
+    }
+  }, [url, token, user]);
 
-  if (isLoading) {
-    return <div>Loading posts</div>;
-  }
+  if (isLoading)
+    return <div className="text-center p-10">Loading your venues...</div>;
+  if (isError)
+    return (
+      <div className="text-center p-10 text-red-600">Error loading data</div>
+    );
 
-  if (isError) {
-    return <div>Error loading data</div>;
-  }
-  console.log(posts);
   return (
     <div className="min-h-dvh">
-      <h1 className="flex  justify-center py-4">My Venues</h1>
+      <h1 className="flex justify-center py-4 text-2xl font-bold">My Venues</h1>
       <div className="flex">
-        <Link
-          className="btn-primary m-auto my-10 flex justify-center"
-          to={"/createvenue"}
-        >
+        <Link className="btn-primary m-auto my-10" to={"/createvenue"}>
           New Venue
         </Link>
       </div>
-      {posts.map((product) => (
-        <div key={product.id}>
-          <div className=" bg-sky-50 rounded-lg shadow-xl m-5">
-            <h2 className=" p-3 place-items-start">{product.name}</h2>
+
+      {posts.length > 0 ? (
+        posts.map((product) => (
+          <div
+            key={product.id}
+            className="bg-sky-50 rounded-lg shadow-xl m-5 p-4"
+          >
+            <h2 className="text-xl font-bold p-3">{product.name}</h2>
             <div className="flex justify-between">
               <div>
-                {product.media.length > 0 ? (
+                {/* Immagine v2: media è un array di oggetti {url, alt} */}
+                {product.media?.length > 0 ? (
                   <img
-                    className="h-48 w-48  object-fill ml-3  rounded-lg "
-                    src={product.media[0]}
-                    alt="image of"
-                  ></img>
+                    className="h-48 w-48 object-cover ml-3 rounded-lg"
+                    src={product.media[0].url}
+                    alt={product.media[0].alt || product.name}
+                  />
                 ) : (
                   <img
-                    className="h-48 w-48  object-fill ml-3  rounded-lg "
+                    className="h-48 w-48 object-cover ml-3 rounded-lg"
                     src={viteLogo}
+                    alt="placeholder"
                   />
                 )}
               </div>
+
               <div className="mr-3 w-40 flex flex-col justify-evenly">
+                {/* Meta icons - aggiunto optional chaining ?. per sicurezza */}
                 <div className="flex justify-between">
-                  <p>Brakfast: </p>
+                  <p>Breakfast: </p>
                   <div className="flex">
-                    {product.meta.breakfast ? (
-                      <img src={checkIcon} />
+                    {product.meta?.breakfast ? (
+                      <img src={checkIcon} alt="yes" />
                     ) : (
-                      <img src={closIcon} />
+                      <img src={closIcon} alt="no" />
                     )}
-                    <img src={breakfastIcon} className="ml-4 sm-icons"></img>
+                    <img
+                      src={breakfastIcon}
+                      alt="icon"
+                      className="ml-4 sm-icons"
+                    />
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Parking: </p>
                   <div className="flex">
-                    {product.meta.parking ? (
-                      <img src={checkIcon} />
+                    {product.meta?.parking ? (
+                      <img src={checkIcon} alt="yes" />
                     ) : (
-                      <img src={closIcon} />
+                      <img src={closIcon} alt="no" />
                     )}
-                    <img src={parkingIcon} className="ml-4 sm-icons"></img>
+                    <img
+                      src={parkingIcon}
+                      alt="icon"
+                      className="ml-4 sm-icons"
+                    />
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Pets: </p>
                   <div className="flex">
-                    {product.meta.pets ? (
-                      <img src={checkIcon} />
+                    {product.meta?.pets ? (
+                      <img src={checkIcon} alt="yes" />
                     ) : (
-                      <img src={closIcon} />
+                      <img src={closIcon} alt="no" />
                     )}
-                    <img src={petsIcon} className="ml-4 sm-icons"></img>
+                    <img src={petsIcon} alt="icon" className="ml-4 sm-icons" />
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Wifi: </p>
                   <div className="flex">
-                    {product.meta.wifi ? (
-                      <img src={checkIcon} />
+                    {product.meta?.wifi ? (
+                      <img src={checkIcon} alt="yes" />
                     ) : (
-                      <img src={closIcon} />
+                      <img src={closIcon} alt="no" />
                     )}
-                    <img src={wifiIcon} className="ml-4 sm-icons"></img>
+                    <img src={wifiIcon} alt="icon" className="ml-4 sm-icons" />
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Guests: </p>
                   <div className="flex">
                     <p>{product.maxGuests}</p>
-                    <img src={personIcon} className="ml-6 sm-icons"></img>
+                    <img
+                      src={personIcon}
+                      alt="icon"
+                      className="ml-6 sm-icons"
+                    />
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <p>Rating: </p>
                   <div className="flex">
                     <p>{product.rating}</p>
-                    <img src={starIcon} className="ml-6 sm-icons"></img>
+                    <img src={starIcon} alt="icon" className="ml-6 sm-icons" />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex justify-between m-3 stronger-text">
-              <p>Price per nigth:</p>
+
+            <div className="flex justify-between m-3 font-bold text-lg">
+              <p>Price per night:</p>
               <p>{product.price} NOK</p>
             </div>
-            <div className="stronger-text m-3 flex justify-between">
+
+            <div className="m-3 flex justify-between font-semibold text-gray-700">
               <p>Location:</p>
               <p>
-                {product.location.city}, {product.location.country}
+                {product.location?.city || "Unknown City"},{" "}
+                {product.location?.country || "Unknown Country"}
               </p>
             </div>
-            <p className="  text-l px-3 pb-3 truncate overflow-hidden ">
+
+            <p className="text-gray-600 px-3 pb-3 truncate">
               {product.description}
             </p>
 
-            <div className="   flex ">
+            <div className="flex pb-5">
               <Link
-                className="btn-primary m-auto my-10 flex justify-center"
+                className="btn-primary m-auto mt-4"
                 to={"myvenuedetail/" + product.id}
-                key={product.id}
-                post={product}
               >
-                Details
+                Manage & Details
               </Link>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="text-center p-10">You haven't created any venues yet.</p>
+      )}
     </div>
   );
 }
