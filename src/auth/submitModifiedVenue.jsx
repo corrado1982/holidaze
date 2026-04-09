@@ -4,14 +4,35 @@ import * as storage from "../storage/index";
 const token = storage.load("token");
 
 export async function submitModifiedVenue(id, data) {
-  // Rimosso event.preventDefault() perché data non è un evento
+  let imageUrl = "";
+
+  if (typeof data.media === "string") {
+    imageUrl = data.media;
+  } else if (Array.isArray(data.media) && data.media[0]?.url) {
+    imageUrl = data.media[0].url;
+  } else if (data.media?.url) {
+    imageUrl = data.media.url;
+  }
+
+  const bodyV2 = {
+    name: data.name,
+    description: data.description,
+    price: Number(data.price),
+    maxGuests: Number(data.maxGuests),
+    // 2. Creiamo l'array corretto (UN SOLO LIVELLO)
+    media: imageUrl ? [{ url: imageUrl, alt: data.name || "Venue image" }] : [],
+    meta: data.meta,
+    location: data.location,
+  };
+
+  console.log("BODY CORRETTO:", JSON.stringify(bodyV2, null, 2));
 
   console.log("ID da modificare:", id);
   console.log("Dati inviati:", data);
 
   // URL corretto per v2: aggiungiamo /holidaze
   const url = `${BASE_URL}/holidaze/venues/${id}`;
-
+  console.log("BODY INVIATO:", JSON.stringify(bodyV2, null, 2));
   try {
     const response = await fetch(url, {
       headers: {
@@ -20,7 +41,7 @@ export async function submitModifiedVenue(id, data) {
         "X-Noroff-API-Key": API_KEY, // Obbligatorio nella v2
       },
       method: "PUT",
-      body: JSON.stringify(data),
+      body: JSON.stringify(bodyV2),
     });
 
     const result = await response.json();

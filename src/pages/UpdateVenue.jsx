@@ -80,7 +80,7 @@ function UpdateVenue() {
       price: Number(data.price),
       maxGuests: Number(data.maxGuests),
     };
-    submitModifiedVenue(id, formattedData);
+    submitModifiedVenue(id, data);
   };
 
   if (isLoading) return <div className="text-center p-10">Loading...</div>;

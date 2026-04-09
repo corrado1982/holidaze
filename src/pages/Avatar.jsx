@@ -1,53 +1,74 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as storage from "../storage/index.js";
-import { BASE_URL } from "../constants/api";
-
-let userName = storage.load("username");
-const token = storage.load("token");
+import { BASE_URL, API_KEY } from "../constants/api";
 
 export function Avatar() {
-  let avatar = storage.load("avatar");
+  const userName = storage.load("username");
+  const token = storage.load("token");
+  const initialAvatar = storage.load("avatar"); // Assumiamo sia una stringa URL
 
-  const [avatarImg, setAvatarImg] = useState(avatar);
-  const [newAvatar, setNewAvatar] = useState(avatarImg);
+  const [avatarImg, setAvatarImg] = useState(initialAvatar);
 
   function onAvatarChange(event) {
-    event.preventDefault();
     setAvatarImg(event.target.value);
   }
 
-  async function upDateAvatar() {
+  async function upDateAvatar(event) {
     event.preventDefault();
 
-    const response = await fetch(
-      BASE_URL + "/profiles/" + userName + "/media",
-      {
+    // URL corretto per v2
+    const url = `${BASE_URL}/holidaze/profiles/${userName}`;
+
+    try {
+      const response = await fetch(url, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          "X-Noroff-API-Key": API_KEY, // Obbligatorio
         },
         method: "PUT",
-        body: JSON.stringify({ avatar: avatarImg }),
+        // Formato oggetto richiesto dalla v2
+        body: JSON.stringify({
+          avatar: {
+            url: avatarImg,
+            alt: `${userName} avatar`,
+          },
+        }),
+      });
+
+      const json = await response.json();
+
+      if (response.ok) {
+        // Nella v2 i dati tornano in json.data.avatar.url
+        const newUrl = json.data.avatar.url;
+        storage.save("avatar", newUrl);
+        setAvatarImg(newUrl);
+        alert("Avatar updated successfully!");
+      } else {
+        alert("Error: " + (json.errors?.[0]?.message || "Failed to update"));
       }
-    );
-    const data = await response.json();
-    console.log(data);
-
-    storage.save("avatar", data.avatar);
-
-    setNewAvatar(storage.load("avatar"));
+    } catch (error) {
+      console.error("Update error:", error);
+    }
   }
+
   return (
-    <div className=" bg-sky-100 rounded-lg shadow-xl m-auto size-4/5 min-h-dvh">
-      <img className="mx-auto my-5" src={newAvatar} />
+    <div className="bg-sky-100 rounded-lg shadow-xl m-auto size-4/5 min-h-screen p-5">
+      <img
+        className="mx-auto my-5 h-40 w-40 rounded-full object-cover border-4 border-white shadow-lg"
+        src={avatarImg || "fallback-url-se-vuoto"}
+        alt="Profile"
+      />
       <form className="flex flex-col" onSubmit={upDateAvatar}>
         <input
           className="form-input px-4 py-3 border rounded my-5 m-auto size-1/2"
-          defaultValue={newAvatar}
-          placeholder="Avatar URL"
+          value={avatarImg}
+          placeholder="Paste new Avatar URL here"
           onChange={onAvatarChange}
         />
-        <button className=" btn-primary mx-auto my-5">Update</button>
+        <button type="submit" className="btn-primary mx-auto my-5">
+          Update Avatar
+        </button>
       </form>
     </div>
   );

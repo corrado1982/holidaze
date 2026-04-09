@@ -22,15 +22,11 @@ const schema = yup
       .required("Please enter a description"),
 
     media: yup
-      .array()
+      .string()
+      .url("Please enter a valid URL")
       .nullable()
-      .transform((value, originalValue) =>
-        Array.isArray(originalValue)
-          ? originalValue
-          : value
-          ? value.split(",").map((media) => media.trim())
-          : [defaultMedia]
-      )
+      .optional()
+      .transform((value) => (value === "" ? null : value))
       .optional(),
 
     price: yup
